@@ -1,4 +1,7 @@
-﻿namespace Portal.Infrastructure.Migrations
+﻿using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
+
+namespace Portal.Infrastructure.Migrations
 {
     public partial class InitDataBase : Migration
     {
