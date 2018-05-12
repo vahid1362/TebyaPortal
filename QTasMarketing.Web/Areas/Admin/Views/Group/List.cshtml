@@ -1,0 +1,44 @@
+﻿@using Kendo.Mvc.UI
+@using QTasMarketing.Web.Framework.ViewModel.Content
+
+@{
+    ViewData["Title"] = "List";
+    Layout = "~/Views/Shared/_AdminLayOut.cshtml";
+}
+<section class="content">
+    <div class="box box-info">
+        <div class="box-header with-border">
+            <div class="col-md-6">
+                <h3 class="box-title">مدیریت گروه ها</h3>
+            </div>
+            <div class="text-left col-md-6">
+                <a href="@Url.Action("Create")"  class="btn btn-primary"> <i class="fa fa-plus fa-lg "></i> گروه جدید</a>
+            
+            </div>
+          
+        </div>
+        <div class="box-body">
+            <div class="row" >
+                <div class="col-md-12">
+                    <div  class="k-rtl">
+                    @(Html.Kendo().Grid<GroupViewModel>().Name("Groups").
+                          Columns(column =>
+                          {
+
+                              column.Bound(c => c.Title);
+                              column.Bound(c => c.Description);
+                              column.Bound(c => c.Priority);
+                              column.Bound(c => c.IsPrivate);
+                              column.Bound(c => c.Id).Title("دستورات").ClientTemplate("<a  class='btn btn-warning' href='" + Url.Action("Edit") + "?GroupId=#=Id#'"+
+                               "><i class=' fa fa-edit'></i>ویرایش</a>");
+
+
+                          })
+                          .DataSource(x => x.Ajax().Read(read => read.Action("Group_Read", "Group"))
+                              .Model(m => m.Id(g => g.Id))))
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

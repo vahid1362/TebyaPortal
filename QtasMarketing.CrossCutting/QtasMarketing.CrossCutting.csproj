@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <AssemblyVersion>20.19.19.19</AssemblyVersion>
+    <FileVersion>20.19.19.19</FileVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Security\" />
+  </ItemGroup>
+
+</Project>
