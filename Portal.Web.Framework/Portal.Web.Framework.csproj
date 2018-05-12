@@ -1,0 +1,9 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <AssemblyVersion>9.8.8.8</AssemblyVersion>
+    <FileVersion>9.8.8.8</FileVersion>
+  </PropertyGroup>
+
+</Project>

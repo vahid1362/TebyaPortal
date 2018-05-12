@@ -48,5 +48,19 @@ namespace QtasMarketing.Services.Test
             Assert.NotEqual(0,group.Id);
         }
 
+        [Fact]
+        public void Add_Content_Test()
+        {
+            var content = new Content()
+            {
+                Title = "تست",
+                Body = "تست 2",
+                Hit = 1
+
+            };
+            _newsService.AddContent(content);
+            Assert.NotEqual(0, content.Id);
+        }
+
     }
 }

@@ -1,0 +1,4 @@
+﻿namespace QtasMarketing.Core.Membership
+{
+
+}

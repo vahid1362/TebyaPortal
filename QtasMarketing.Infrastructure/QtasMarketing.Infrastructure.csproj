@@ -2,17 +2,13 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <AssemblyVersion>21.20.20.20</AssemblyVersion>
-    <FileVersion>21.20.20.20</FileVersion>
+    <AssemblyVersion>22.21.21.21</AssemblyVersion>
+    <FileVersion>22.21.21.21</FileVersion>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.1.0-rc1-final" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.0.3" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\QtasMarketing.Core\QtasMarketing.Core.csproj" />
   </ItemGroup>
 
   <ItemGroup>
