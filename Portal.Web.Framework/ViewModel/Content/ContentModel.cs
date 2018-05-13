@@ -16,6 +16,7 @@ namespace QTasMarketing.Web.Framework.ViewModel.Content
         [DisplayName("متن")]
         public string Body { get; set; }
 
+       
         [Required(ErrorMessage = "این  فیلد ضروری است")]
         [DisplayName("قابل نظر دادن باشد")]
         public bool IsAllowedComment { get; set; }

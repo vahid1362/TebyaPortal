@@ -25,10 +25,12 @@
                           Columns(column =>
                           {
 
-                              column.Bound(c => c.Title);
-                              column.Bound(c => c.Description);
-                              column.Bound(c => c.Priority);
-                              column.Bound(c => c.IsPrivate);
+                          column.Bound(c => c.Title);
+                          column.Bound(c => c.Description);
+                          column.Bound(c => c.Priority);
+
+                          column.Bound(c => c.IsPrivate);
+
                               column.Bound(c => c.Id).Title("دستورات").ClientTemplate("<a  class='btn btn-warning' href='" + Url.Action("Edit") + "?GroupId=#=Id#'"+
                                "><i class=' fa fa-edit'></i>ویرایش</a>");
 

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using Microsoft.EntityFrameworkCore;
+using Portal.core.Media;
 using QtasMarketing.Core.News;
 
 namespace QtasMarketing.Infrastructure
@@ -17,6 +18,8 @@ namespace QtasMarketing.Infrastructure
         public DbSet<Content> Contents { get; set; }
 
         public DbSet<Group> Groups { get; set; }
+
+        public DbSet<Picture> Pictures { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

@@ -1,55 +1,113 @@
 ﻿@using Kendo.Mvc.UI
 @model QTasMarketing.Web.Framework.ViewModel.Content.GroupViewModel
 <div class="box-body">
-   
- 
- 
-        @Html.HiddenFor(x=>x.Id)
+
+
+
+    @Html.HiddenFor(x => x.Id)
     <div class="row">
         <div class="col-md-12">
-            
+
             <div class="form-group">
-                @Html.Label("","گروه والد",new {@class="control-label col-md-1"})
-                <div class="col-md-6">
+                @Html.Label("", "گروه والد", new { @class = "control-label col-md-3" })
+                <div class="col-md-9">
                     @(Html.Kendo()
-                          .DropDownList()
-                          .Name("Groups")
-                          .DataValueField("Id")
-                          .DataTextField("Title")
-                         .DataSource(datasource=>datasource.Read(read=>read.Action("ComboBox_Read","Group")))
-                          .Value(Model.ParentId?.ToString()))
+                                  .DropDownList()
+                                  .Name("Groups")
+                                  .DataValueField("Id")
+                                  .DataTextField("Title")
+                                 .DataSource(datasource => datasource.Read(read => read.Action("ComboBox_Read", "Group")))
+                                  .Value(Model.ParentId?.ToString()))
 
                 </div>
             </div>
 
             <div class="form-group">
-                @Html.LabelFor(model => model.Title, htmlAttributes: new {@class = "control-label col-md-1"})
-                
-                <div class="col-md-2">
-                    @Html.EditorFor(model => model.Title, new {htmlAttributes = new {@class = "form-control"}})
-                    @Html.ValidationMessageFor(model => model.Title, "", new {@class = "text-danger"})
+                @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-3" })
+
+                <div class="col-md-9">
+                    @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
                 </div>
-                @Html.LabelFor(model => model.Description, htmlAttributes: new {@class = "control-label col-md-1"})
-                <div class="col-md-2">
-                    @Html.EditorFor(model => model.Description, new {htmlAttributes = new {@class = "form-control date-textbox"}})
-                    @Html.ValidationMessageFor(model => model.Description, "", new {@class = "text-danger"})
+
+            </div>
+
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-3" })
+                <div class="col-md-9">
+                    @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control date-textbox" } })
+                    @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
                 </div>
             </div>
 
             <div class="form-group">
-                @Html.LabelFor(model => model.Priority, htmlAttributes: new {@class = "control-label col-md-1"})
-                <div class="col-md-2">
-                    @Html.TextBoxFor(model => model.Priority, new {htmlAttributes = new {@class = "form-control "}})
-                    @Html.ValidationMessageFor(model => model.Priority, "", new {@class = "text-danger"})
+                @Html.LabelFor(model => model.Priority, htmlAttributes: new { @class = "control-label col-md-3" })
+                <div class="col-md-9">
+                    @Html.TextBoxFor(model => model.Priority, new { htmlAttributes = new { @class = "form-control " } })
+                    @Html.ValidationMessageFor(model => model.Priority, "", new { @class = "text-danger" })
                 </div>
-                @Html.LabelFor(model => model.IsPrivate, htmlAttributes: new {@class = "control-label col-md-1"})
-                <div class="col-md-2 ">
-                    @Html.CheckBoxFor(model => model.IsPrivate, new {htmlAttributes = new {@class = "form-control "}})
 
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.IsPrivate, htmlAttributes: new { @class = "control-label col-md-3" })
+                <div class="col-md-9 ">
+                    @Html.CheckBoxFor(model => model.IsPrivate, new { htmlAttributes = new { @class = "form-control " } })
+
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-3">
+                                   
+                    
+
+                   
+                </div>
+                <div class="col-md-4 ">
+                    @(Html.Kendo().Upload()
+       .Name("files")
+       .Async(a => a
+           .Save("Save", "Group")
+           .Remove("Remove", "Upload")
+           .AutoUpload(true)
+       )
+       .Events(e => e.Success("onSuccess"))
+
+
+       .Validation(validation =>
+       {
+           validation.AllowedExtensions(new string[] { ".jpg", ".jpeg", ".png", ".bmp", ".gif" });
+           validation.MinFileSize(500);
+       }))
+
+                </div>
+                <div class="col-md-5">
+                    <div id="products"></div>
                 </div>
             </div>
 
         </div>
     </div>
- 
+
 </div>
+<script>
+    function onSuccess(e) {
+        if (e.operation == "upload") {
+            for (var i = 0; i < e.files.length; i++) {
+                var file = e.files[i].rawFile;
+
+                if (file) {
+                    var reader = new FileReader();
+
+                    reader.onloadend = function () {
+                        $("<div class='product'><img src=" + this.result + " /></div>").appendTo($("#products"));
+                    };
+
+                    reader.readAsDataURL(file);
+                }
+            }
+
+    }
+
+</script>

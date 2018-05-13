@@ -11,36 +11,15 @@ using System;
 namespace Portal.Infrastructure.Migrations
 {
     [DbContext(typeof(MarketingDbContext))]
-    partial class MarketingDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180513131811_ParentIdFeild")]
+    partial class ParentIdFeild
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "2.0.3-rtm-10026")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-            modelBuilder.Entity("Portal.core.Media.Picture", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("AltAttribute");
-
-                    b.Property<bool>("IsNew");
-
-                    b.Property<string>("MimeType");
-
-                    b.Property<byte[]>("PictureBinary");
-
-                    b.Property<string>("SeoFilename");
-
-                    b.Property<string>("TitleAttribute");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Pictures");
-                });
 
             modelBuilder.Entity("QtasMarketing.Core.News.Content", b =>
                 {
@@ -77,13 +56,9 @@ namespace Portal.Infrastructure.Migrations
 
                     b.Property<string>("Description");
 
-                    b.Property<bool>("DisplayInMain");
-
                     b.Property<bool>("IsPrivate");
 
                     b.Property<long?>("ParentId");
-
-                    b.Property<bool>("PictureID");
 
                     b.Property<int>("Priority");
 

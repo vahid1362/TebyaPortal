@@ -11,9 +11,10 @@ using System;
 namespace Portal.Infrastructure.Migrations
 {
     [DbContext(typeof(MarketingDbContext))]
-    partial class MarketingDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180513163935_PictureDomain")]
+    partial class PictureDomain
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

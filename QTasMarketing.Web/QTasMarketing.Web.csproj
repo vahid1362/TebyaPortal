@@ -1,8 +1,8 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
   <PropertyGroup>
     <TargetFramework>netcoreapp2.0</TargetFramework>
-    <AssemblyVersion>33.32.32.32</AssemblyVersion>
-    <FileVersion>33.32.32.32</FileVersion>
+    <AssemblyVersion>40.39.39.39</AssemblyVersion>
+    <FileVersion>40.39.39.39</FileVersion>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="AdminLTE" Version="2.4.0" />
@@ -20,6 +20,7 @@
   <ItemGroup>
     <Folder Include="Areas\Admin\Data\" />
     <Folder Include="Areas\Admin\Models\" />
+    <Folder Include="Views\Shared\EditorTemplate\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Portal.core\Portal.core.csproj" />

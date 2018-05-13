@@ -51,26 +51,26 @@ namespace QTasMarketing.Web.Areas.Admin.Controllers
 
 
 
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public IActionResult Create(GroupViewModel groupViewModel)
-        //{
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Create(ContentViewModel contentViewModel)
+        {
 
-        //    //if (ModelState.IsValid)
-        //    //{
-        //    //    var group = _mapper.Map<GroupViewModel, Group>(groupViewModel);
-        //    //    _newsService.AddGroup(group);
-        //    //    if (group.Id > 0)
-        //    //    {
-        //    //        _toastNotification.AddSuccessToastMessage("عملیات  با موفقیت صورت پذیرفت");
-        //    //        return RedirectToAction("List");
-        //    //    }
-        //    //    _toastNotification.AddErrorToastMessage("خطا در انجام عملیات");
+            if (ModelState.IsValid)
+            {
+                var content = _mapper.Map<ContentViewModel, Content>(contentViewModel);
+                _newsService.AddContent(content);
+                if (content.Id > 0)
+                {
+                    _toastNotification.AddSuccessToastMessage("عملیات  با موفقیت صورت پذیرفت");
+                    return RedirectToAction("List");
+                }
+                _toastNotification.AddErrorToastMessage("خطا در انجام عملیات");
 
-        //    //}
+            }
 
-        //    return View(new GroupViewModel());
-        //}
+            return View(new ContentViewModel());
+        }
 
 
 
