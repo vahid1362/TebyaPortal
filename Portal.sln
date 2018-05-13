@@ -11,19 +11,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QTasMarketing.Web", "QTasMa
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{B45DF7A0-4FA0-429D-B2B2-0B252CE0D114}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QtasMarketing.Services.Test", "QtasMarketing.Services.Test\QtasMarketing.Services.Test.csproj", "{0BDBB91C-EB7B-4E99-8471-78AEF1C06B17}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Portal.core", "Portal.core\Portal.core.csproj", "{BAC97C77-522A-421D-8233-2E5082FA4EB7}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QtasMarketing.Core.Test", "QtasMarketing.Core.Test\QtasMarketing.Core.Test.csproj", "{7BC0DCA4-832B-4B81-92F5-F789D04169AE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Portal.CrossCutting", "Portal.CrossCutting\Portal.CrossCutting.csproj", "{0A338E10-28B7-4843-88F7-C2ED1E0BCCDC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Portal.core", "Portal.core\Portal.core.csproj", "{BAC97C77-522A-421D-8233-2E5082FA4EB7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Portal.Infrastructure", "Portal.Infrastructure\Portal.Infrastructure.csproj", "{D015F041-8C3A-4A0E-ADA0-EB16B672DCE0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Portal.CrossCutting", "Portal.CrossCutting\Portal.CrossCutting.csproj", "{0A338E10-28B7-4843-88F7-C2ED1E0BCCDC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Portal.Service", "Portal.Service\Portal.Service.csproj", "{C826AED5-1E27-437D-BFDA-CFAEAF146939}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Portal.Infrastructure", "Portal.Infrastructure\Portal.Infrastructure.csproj", "{D015F041-8C3A-4A0E-ADA0-EB16B672DCE0}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Portal.Service", "Portal.Service\Portal.Service.csproj", "{C826AED5-1E27-437D-BFDA-CFAEAF146939}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Portal.Web.Framework", "Portal.Web.Framework\Portal.Web.Framework.csproj", "{5C3CBD6B-251C-4073-BE63-CA8A54D1556C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Portal.Web.Framework", "Portal.Web.Framework\Portal.Web.Framework.csproj", "{5C3CBD6B-251C-4073-BE63-CA8A54D1556C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,14 +31,6 @@ Global
 		{9C464638-3D29-40BA-8D08-113AB28CFC58}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9C464638-3D29-40BA-8D08-113AB28CFC58}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9C464638-3D29-40BA-8D08-113AB28CFC58}.Release|Any CPU.Build.0 = Release|Any CPU
-		{0BDBB91C-EB7B-4E99-8471-78AEF1C06B17}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0BDBB91C-EB7B-4E99-8471-78AEF1C06B17}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0BDBB91C-EB7B-4E99-8471-78AEF1C06B17}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0BDBB91C-EB7B-4E99-8471-78AEF1C06B17}.Release|Any CPU.Build.0 = Release|Any CPU
-		{7BC0DCA4-832B-4B81-92F5-F789D04169AE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7BC0DCA4-832B-4B81-92F5-F789D04169AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7BC0DCA4-832B-4B81-92F5-F789D04169AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7BC0DCA4-832B-4B81-92F5-F789D04169AE}.Release|Any CPU.Build.0 = Release|Any CPU
 		{BAC97C77-522A-421D-8233-2E5082FA4EB7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{BAC97C77-522A-421D-8233-2E5082FA4EB7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BAC97C77-522A-421D-8233-2E5082FA4EB7}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -69,8 +57,6 @@ Global
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{9C464638-3D29-40BA-8D08-113AB28CFC58} = {53514424-2B4A-44A2-A22A-704575EF87B7}
-		{0BDBB91C-EB7B-4E99-8471-78AEF1C06B17} = {B45DF7A0-4FA0-429D-B2B2-0B252CE0D114}
-		{7BC0DCA4-832B-4B81-92F5-F789D04169AE} = {B45DF7A0-4FA0-429D-B2B2-0B252CE0D114}
 		{BAC97C77-522A-421D-8233-2E5082FA4EB7} = {5989FCC9-B91A-40C3-8A04-813A54506A1F}
 		{0A338E10-28B7-4843-88F7-C2ED1E0BCCDC} = {5989FCC9-B91A-40C3-8A04-813A54506A1F}
 		{D015F041-8C3A-4A0E-ADA0-EB16B672DCE0} = {5989FCC9-B91A-40C3-8A04-813A54506A1F}
