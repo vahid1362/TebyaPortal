@@ -1,8 +1,8 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
   <PropertyGroup>
     <TargetFramework>netcoreapp2.0</TargetFramework>
-    <AssemblyVersion>40.39.39.39</AssemblyVersion>
-    <FileVersion>40.39.39.39</FileVersion>
+    <AssemblyVersion>41.40.40.40</AssemblyVersion>
+    <FileVersion>41.40.40.40</FileVersion>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="AdminLTE" Version="2.4.0" />

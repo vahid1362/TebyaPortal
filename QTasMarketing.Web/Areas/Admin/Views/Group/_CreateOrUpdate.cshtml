@@ -12,12 +12,12 @@
                 @Html.Label("", "گروه والد", new { @class = "control-label col-md-3" })
                 <div class="col-md-9">
                     @(Html.Kendo()
-                                  .DropDownList()
-                                  .Name("Groups")
-                                  .DataValueField("Id")
-                                  .DataTextField("Title")
-                                 .DataSource(datasource => datasource.Read(read => read.Action("ComboBox_Read", "Group")))
-                                  .Value(Model.ParentId?.ToString()))
+                                          .DropDownList()
+                                          .Name("Groups")
+                                          .DataValueField("Id")
+                                          .DataTextField("Title")
+                                         .DataSource(datasource => datasource.Read(read => read.Action("ComboBox_Read", "Group")))
+                                          .Value(Model.ParentId?.ToString()))
 
                 </div>
             </div>
@@ -59,27 +59,27 @@
 
             <div class="form-group">
                 <div class="col-md-3">
-                                   
-                    
 
-                   
+
+
+
                 </div>
                 <div class="col-md-4 ">
                     @(Html.Kendo().Upload()
-       .Name("files")
-       .Async(a => a
-           .Save("Save", "Group")
-           .Remove("Remove", "Upload")
-           .AutoUpload(true)
-       )
-       .Events(e => e.Success("onSuccess"))
+               .Name("files")
+               .Async(a => a
+                   .Save("Save", "Group")
+                   .Remove("Remove", "Upload")
+                   .AutoUpload(true)
+               )
+                 .Events(e => e.Success("onSuccess"))
 
 
-       .Validation(validation =>
-       {
-           validation.AllowedExtensions(new string[] { ".jpg", ".jpeg", ".png", ".bmp", ".gif" });
-           validation.MinFileSize(500);
-       }))
+               .Validation(validation =>
+               {
+                   validation.AllowedExtensions(new string[] { ".jpg", ".jpeg", ".png", ".bmp", ".gif" });
+                   validation.MinFileSize(500);
+               }))
 
                 </div>
                 <div class="col-md-5">
@@ -107,7 +107,7 @@
                     reader.readAsDataURL(file);
                 }
             }
-
+        }
     }
 
 </script>

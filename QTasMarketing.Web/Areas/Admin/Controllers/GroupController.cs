@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using AutoMapper;
 using Kendo.Mvc.Extensions;
 using Kendo.Mvc.UI;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using NToastNotify;
@@ -22,6 +25,7 @@ namespace QTasMarketing.Web.Areas.Admin.Controllers
         private readonly IMapper _mapper;
         private readonly INewsService _newsService;
         private readonly IToastNotification _toastNotification;
+      
 
         #endregion
 
@@ -123,6 +127,26 @@ namespace QTasMarketing.Web.Areas.Admin.Controllers
             var groupsModel = _mapper.Map<List<Group>, List<GroupViewModel>>(groups);
 
             return Json(groupsModel);
+        }
+
+        public IActionResult Save(IEnumerable<IFormFile> files)
+        {
+            if (files != null)
+            {
+                foreach (var file in files)
+                {
+                    var fileContent = ContentDispositionHeaderValue.Parse(file.ContentDisposition);
+
+                    // Some browsers send file names with full path.
+                    // We are only interested in the file name.
+                    //var fileName = Path.GetFileName(fileContent.FileName.Trim('"'));
+                    //var physicalPath = Path.Combine(HostingEnvironment.WebRootPath, "App_Data", fileName);
+
+                    // The files are not actually saved in this demo
+                    //file.SaveAs(physicalPath);
+                }
+            }
+            return Content("");
         }
 
     }
