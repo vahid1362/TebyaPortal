@@ -69,11 +69,11 @@
                .Name("files")
                .Async(a => a
                    .Save("Save", "Group")
-                   .Remove("Remove", "Upload")
+                   .Remove("Remove", "Group")
                    .AutoUpload(true)
                )
-                 .Events(e => e.Success("onSuccess"))
-
+                 .Events(e => e.Success("onSuccess").Remove("onRemove")).Multiple(false)
+                        
 
                .Validation(validation =>
                {
@@ -108,6 +108,11 @@
                 }
             }
         }
+    }
+
+    function onRemove(e) {
+
+        $("#products").removeChild();
     }
 
 </script>
