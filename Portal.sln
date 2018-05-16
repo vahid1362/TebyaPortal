@@ -21,6 +21,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Portal.Service", "Portal.Se
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Portal.Web.Framework", "Portal.Web.Framework\Portal.Web.Framework.csproj", "{5C3CBD6B-251C-4073-BE63-CA8A54D1556C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServicesTest", "ServicesTest\ServicesTest.csproj", "{6327F3EB-826C-4938-BC1E-F2E43F9E8985}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,10 @@ Global
 		{5C3CBD6B-251C-4073-BE63-CA8A54D1556C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5C3CBD6B-251C-4073-BE63-CA8A54D1556C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5C3CBD6B-251C-4073-BE63-CA8A54D1556C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6327F3EB-826C-4938-BC1E-F2E43F9E8985}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6327F3EB-826C-4938-BC1E-F2E43F9E8985}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6327F3EB-826C-4938-BC1E-F2E43F9E8985}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6327F3EB-826C-4938-BC1E-F2E43F9E8985}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -62,6 +68,7 @@ Global
 		{D015F041-8C3A-4A0E-ADA0-EB16B672DCE0} = {5989FCC9-B91A-40C3-8A04-813A54506A1F}
 		{C826AED5-1E27-437D-BFDA-CFAEAF146939} = {5989FCC9-B91A-40C3-8A04-813A54506A1F}
 		{5C3CBD6B-251C-4073-BE63-CA8A54D1556C} = {53514424-2B4A-44A2-A22A-704575EF87B7}
+		{6327F3EB-826C-4938-BC1E-F2E43F9E8985} = {B45DF7A0-4FA0-429D-B2B2-0B252CE0D114}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {55EC79B2-BA10-40B3-B0E5-8CAB2162724E}

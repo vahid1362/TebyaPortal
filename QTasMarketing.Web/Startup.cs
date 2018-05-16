@@ -1,10 +1,13 @@
 using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Rest.Serialization;
+using Portal.core.Membership;
+using Portal.Infrastructure;
 using QtasMarketing.Core.Infrastructure;
 using QtasMarketing.Infrastructure;
 using QtasMarketing.Services.News;
@@ -27,15 +30,16 @@ namespace QTasMarketing.Web
             {
                 c.UseSqlServer(Configuration.GetConnectionString("MarketingContext"));
             });
+            services.AddDbContext<PortalIdentityContext>(c => { c.UseSqlServer(Configuration.GetConnectionString("IdentityContext")); }
+            );
 
+            services.AddIdentity<User, IdentityRole>().AddEntityFrameworkStores<PortalIdentityContext>().AddDefaultTokenProviders();
 
-
-
-            services.AddMvc().AddJsonOptions(options => options.SerializerSettings.ContractResolver = new ReadOnlyJsonContractResolver());
+            services.AddMvc().AddJsonOptions(options => options.SerializerSettings.ContractResolver = new ReadOnlyJsonContractResolver()).AddNToastNotifyToastr();
             services.AddKendo();
             services.AddTransient(typeof(IRepository<>), typeof(EFRepository<>));
             services.AddTransient<INewsService, NewsService>();
-            services.AddMvc().AddNToastNotifyToastr();
+      
             services.AddAutoMapper();
 
 

@@ -72,7 +72,13 @@
                    .Remove("Remove", "Group")
                    .AutoUpload(true)
                )
-                 .Events(e => e.Success("onSuccess").Remove("onRemove")).Multiple(false)
+                          .Events(events => events
+                              
+                              .Remove("onRemove")
+                            
+                              .Success("onSuccess")
+                             
+                          ).Multiple(false)
                         
 
                .Validation(validation =>
@@ -112,7 +118,7 @@
 
     function onRemove(e) {
 
-        $("#products").removeChild();
+        $("#products").children().remove();
     }
 
 </script>
