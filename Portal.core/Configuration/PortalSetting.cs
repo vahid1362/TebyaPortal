@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Portal.core.Configuration
 {
- public   class PortalSetting:ISetting
+ public   class PortalSetting:ISettings
     {
         public int MaximumUploadPictureFile{ get; set; }
     }

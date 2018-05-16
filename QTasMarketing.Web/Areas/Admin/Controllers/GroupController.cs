@@ -133,23 +133,23 @@ namespace QTasMarketing.Web.Areas.Admin.Controllers
 
         public IActionResult Save(IFormFile file)
         {
-            if (file != null && !string.IsNullOrEmpty(file.FileName))
-            {
-                foreach (var file in files)
-                {
-                    var fileContent = ContentDispositionHeaderValue.Parse(file.ContentDisposition);
-                    fi
+            //if (file != null && !string.IsNullOrEmpty(file.FileName))
+            //{
+            //    foreach (var file in files)
+            //    {
+            //        var fileContent = ContentDispositionHeaderValue.Parse(file.ContentDisposition);
+                   
 
 
-                    // Some browsers send file names with full path.
-                    // We are only interested in the file name.
-                    //var fileName = Path.GetFileName(fileContent.FileName.Trim('"'));
-                    //var physicalPath = Path.Combine(HostingEnvironment.WebRootPath, "App_Data", fileName);
+            //        // Some browsers send file names with full path.
+            //        // We are only interested in the file name.
+            //        //var fileName = Path.GetFileName(fileContent.FileName.Trim('"'));
+            //        //var physicalPath = Path.Combine(HostingEnvironment.WebRootPath, "App_Data", fileName);
 
-                    // The files are not actually saved in this demo
-                    //file.SaveAs(physicalPath);
-                }
-            }
+            //        // The files are not actually saved in this demo
+            //        //file.SaveAs(physicalPath);
+            //    }
+         //   }
             return Content("");
         }
         public ActionResult Remove(string[] fileNames)

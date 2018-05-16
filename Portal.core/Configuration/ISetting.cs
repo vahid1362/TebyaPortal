@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Portal.core.Configuration
 {
-   public interface ISetting
+   public interface ISettings
     {
     }
 }
