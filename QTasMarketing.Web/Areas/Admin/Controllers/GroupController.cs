@@ -131,13 +131,15 @@ namespace QTasMarketing.Web.Areas.Admin.Controllers
             return Json(groupsModel);
         }
 
-        public IActionResult Save(IEnumerable<IFormFile> files)
+        public IActionResult Save(IFormFile file)
         {
-            if (files != null)
+            if (file != null && !string.IsNullOrEmpty(file.FileName))
             {
                 foreach (var file in files)
                 {
                     var fileContent = ContentDispositionHeaderValue.Parse(file.ContentDisposition);
+                    fi
+
 
                     // Some browsers send file names with full path.
                     // We are only interested in the file name.

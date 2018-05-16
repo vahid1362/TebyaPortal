@@ -65,15 +65,16 @@
 
                 </div>
                 <div class="col-md-4 ">
+                    
                     @(Html.Kendo().Upload()
                .Name("files")
-               .Async(a => a
-                   .Save("Save", "Group")
-                   .Remove("Remove", "Group")
-                   .AutoUpload(true)
-               )
+                 .Async(a => a
+                     .Save("Save", "Group")
+                     .Remove("Remove", "Group")
+                     .AutoUpload(true)
+                 )
                  .Events(e => e.Success("onSuccess").Remove("onRemove")).Multiple(false)
-                        
+
 
                .Validation(validation =>
                {
@@ -112,7 +113,7 @@
 
     function onRemove(e) {
 
-        $("#products").removeChild();
+        $("#products").children().remove();
     }
 
 </script>
