@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Portal.core.Infrastructure;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
@@ -336,7 +337,10 @@ namespace Portal.core
 
         #region Properties
 
-      
+        /// <summary>
+        /// Gets or sets the default file provider
+        /// </summary>
+        public static IPortalFileProvider DefaultFileProvider { get; set; }
 
         #endregion
     }

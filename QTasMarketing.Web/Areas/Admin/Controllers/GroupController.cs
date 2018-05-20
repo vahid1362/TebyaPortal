@@ -13,6 +13,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using NToastNotify;
+using Portal.Service;
 using QtasMarketing.Core.News;
 using QtasMarketing.Services.News;
 using QTasMarketing.Web.Framework.ViewModel.Content;
@@ -27,16 +28,18 @@ namespace QTasMarketing.Web.Areas.Admin.Controllers
         private readonly IMapper _mapper;
         private readonly INewsService _newsService;
         private readonly IToastNotification _toastNotification;
+        private readonly IPictureService _pictureService;
       
 
         #endregion
 
         #region Ctor
 
-        public GroupController(IMapper mapper, INewsService newsService, IToastNotification toastNotification)
+        public GroupController(IMapper mapper, INewsService newsService,IPictureService pictureService, IToastNotification toastNotification)
         {
             _mapper = mapper;
             _newsService = newsService;
+            _pictureService = pictureService;
             _toastNotification = toastNotification;
         }
 
@@ -131,25 +134,24 @@ namespace QTasMarketing.Web.Areas.Admin.Controllers
             return Json(groupsModel);
         }
 
-        public IActionResult Save(IFormFile file)
+        public IActionResult Save(IFormFile file, int? pictureId)
         {
-            //if (file != null && !string.IsNullOrEmpty(file.FileName))
-            //{
-            //    foreach (var file in files)
-            //    {
-            //        var fileContent = ContentDispositionHeaderValue.Parse(file.ContentDisposition);
-                   
+            if (file != null && !string.IsNullOrEmpty(file.FileName))
+            {
+
+                var fileContent = ContentDispositionHeaderValue.Parse(file.ContentDisposition);
+
+              //  _pictureService.InsertPicture()
 
 
-            //        // Some browsers send file names with full path.
-            //        // We are only interested in the file name.
-            //        //var fileName = Path.GetFileName(fileContent.FileName.Trim('"'));
-            //        //var physicalPath = Path.Combine(HostingEnvironment.WebRootPath, "App_Data", fileName);
+                //Some browsers send file names with full path.
+                // We are only interested in the file name.
+                //var fileName = Path.GetFileName(fileContent.FileName.Trim('"'));
+                //var physicalPath = Path.Combine(HostingEnvironment.WebRootPath, "App_Data", fileName);
 
-            //        // The files are not actually saved in this demo
-            //        //file.SaveAs(physicalPath);
-            //    }
-         //   }
+                //The files are not actually saved in this demo
+            }
+           
             return Content("");
         }
         public ActionResult Remove(string[] fileNames)

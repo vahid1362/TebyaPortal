@@ -68,18 +68,18 @@
                     @(Html.Kendo().Upload()
                .Name("files")
                .Async(a => a
-                   .Save("Save", "Group")
+                   .Save("Save", "Group",new {Model.PictureId })
                    .Remove("Remove", "Group")
                    .AutoUpload(true)
                )
                           .Events(events => events
-                              
+
                               .Remove("onRemove")
-                            
+
                               .Success("onSuccess")
-                             
+
                           ).Multiple(false)
-                        
+
 
                .Validation(validation =>
                {

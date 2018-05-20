@@ -23,5 +23,9 @@ namespace QTasMarketing.Web.Framework.ViewModel.Content
 
         [DisplayName("آیا خصوصصی باشد")]
         public bool IsPrivate { get; set; }
+
+
+        public int? PictureId { get; set; }
+       
     }
 }

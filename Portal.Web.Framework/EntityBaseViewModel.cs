@@ -7,6 +7,6 @@ namespace QTasMarketing.Web.Framework
  public abstract   class EntityBaseViewModel
     {
 
-        public long Id { get; set; }
+        public int Id { get; set; }
     }
 }
