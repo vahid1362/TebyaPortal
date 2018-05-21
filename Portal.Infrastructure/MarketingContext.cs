@@ -1,15 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Portal.core.Media;
 using QtasMarketing.Core.News;
 
-namespace QtasMarketing.Infrastructure
+namespace Portal.Infrastructure
 {
-  public  class MarketingDbContext:DbContext
+  public  class PortalDbContext:DbContext
     {
-        public MarketingDbContext(DbContextOptions<MarketingDbContext> options):base(options)
+        public PortalDbContext(DbContextOptions<PortalDbContext> options):base(options)
         {
             
         }

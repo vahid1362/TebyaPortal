@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Text;
-using System.Drawing;
+﻿using System.IO;
 using ImageResizer;
 using Portal.core;
 using Portal.core.Media;
 using QtasMarketing.Core.Infrastructure;
+using  System.Drawing;
+using ImageSharp;
+using ImageSharp.Processing;
 
 namespace Portal.Service.Media
 {
@@ -17,7 +16,12 @@ namespace Portal.Service.Media
 
         public MediaSettings MediaSettings => _mediaSettings;
 
-        public IRepository<Picture> PictureRepository { get => pictureRepository; set => pictureRepository = value; }
+        public IRepository<Picture> PictureRepository
+        {
+            get => pictureRepository;
+            set => pictureRepository = value;
+        }
+
         #region Ctor
 
         public PictureService(IRepository<Picture> pictureRepository) => PictureRepository = pictureRepository;
@@ -26,7 +30,9 @@ namespace Portal.Service.Media
         #endregion
 
         #region crud
-        public Picture InsertPicture(byte[] pictureBinary, string mimeType, string seoFilename, string altAttribute = null, string titleAttribute = null, bool isNew = true, bool validateBinary = true)
+
+        public Picture InsertPicture(byte[] pictureBinary, string mimeType, string seoFilename,
+            string altAttribute = null, string titleAttribute = null, bool isNew = true, bool validateBinary = true)
         {
             mimeType = CommonHelper.EnsureNotNull(mimeType);
             mimeType = CommonHelper.EnsureMaximumLength(mimeType, 20);
@@ -38,7 +44,7 @@ namespace Portal.Service.Media
 
             var picture = new Picture
             {
-                PictureBinary =  pictureBinary,
+                PictureBinary = pictureBinary,
                 MimeType = mimeType,
                 SeoFilename = seoFilename,
                 AltAttribute = altAttribute,
@@ -46,7 +52,7 @@ namespace Portal.Service.Media
                 IsNew = isNew,
             };
             PictureRepository.Insert(picture);
-                     
+
 
             return picture;
         }
@@ -55,16 +61,21 @@ namespace Portal.Service.Media
         {
             using (var destStream = new MemoryStream())
             {
-                ImageBuilder.Current.Build(pictureBinary, destStream, new ResizeSettings
-                {
-                    MaxWidth = MediaSettings.MaximumImageSize,
-                    MaxHeight = MediaSettings.MaximumImageSize,
-                    Quality = MediaSettings.DefaultImageQuality
-                });
-                return destStream.ToArray();
-            }
-        }
-        #endregion
+                //ImageBuilder.Current.Build(pictureBinary, destStream, new ResizeSettings
+                //{
+                //    MaxWidth = MediaSettings.MaximumImageSize,
+                //    MaxHeight = MediaSettings.MaximumImageSize,
+                //    Quality = MediaSettings.DefaultImageQuality
+                //});
 
+
+
+                return destStream.ToArray();
+
+                }
+
+            #endregion
+
+        }
     }
 }

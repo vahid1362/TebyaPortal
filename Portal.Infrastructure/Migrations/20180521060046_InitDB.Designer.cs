@@ -5,14 +5,14 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.EntityFrameworkCore.Storage.Internal;
-using QtasMarketing.Infrastructure;
+using Portal.Infrastructure;
 using System;
 
 namespace Portal.Infrastructure.Migrations
 {
-    [DbContext(typeof(MarketingDbContext))]
-    [Migration("20180513163935_PictureDomain")]
-    partial class PictureDomain
+    [DbContext(typeof(PortalDbContext))]
+    [Migration("20180521060046_InitDB")]
+    partial class InitDB
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

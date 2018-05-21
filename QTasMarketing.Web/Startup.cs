@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Rest.Serialization;
+using Portal.Infrastructure;
 using Portal.Service;
 using Portal.Service.Media;
 using QtasMarketing.Core.Infrastructure;
@@ -25,7 +26,7 @@ namespace QTasMarketing.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<MarketingDbContext>(c =>
+            services.AddDbContext<PortalDbContext>(c =>
             {
                 c.UseSqlServer(Configuration.GetConnectionString("MarketingContext"));
             });

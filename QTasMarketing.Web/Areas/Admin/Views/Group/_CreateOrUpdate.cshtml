@@ -1,5 +1,6 @@
 ﻿@using Kendo.Mvc.UI
-@model QTasMarketing.Web.Framework.ViewModel.Content.GroupViewModel
+@using Portal.Web.Framework.ViewModel.Content
+@model Portal.Web.Framework.ViewModel.Content.GroupViewModel
 <div class="box-body">
 
 
@@ -11,13 +12,7 @@
             <div class="form-group">
                 @Html.Label("", "گروه والد", new { @class = "control-label col-md-3" })
                 <div class="col-md-9">
-                    @(Html.Kendo()
-                                          .DropDownList()
-                                          .Name("Groups")
-                                          .DataValueField("Id")
-                                          .DataTextField("Title")
-                                         .DataSource(datasource => datasource.Read(read => read.Action("ComboBox_Read", "Group")))
-                                          .Value(Model.ParentId?.ToString()))
+                   @Html.DropDownListFor(model=>model.ParentId,Model.AvaiableGroup ,new {})
 
                 </div>
             </div>

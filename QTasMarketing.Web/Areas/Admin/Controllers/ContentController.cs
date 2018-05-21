@@ -4,6 +4,7 @@ using Kendo.Mvc.Extensions;
 using Kendo.Mvc.UI;
 using Microsoft.AspNetCore.Mvc;
 using NToastNotify;
+using Portal.Web.Framework.ViewModel.Content;
 using QtasMarketing.Core.News;
 using QtasMarketing.Services.News;
 using QTasMarketing.Web.Framework.ViewModel.Content;

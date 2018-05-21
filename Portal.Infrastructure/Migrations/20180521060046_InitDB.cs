@@ -1,9 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
+using System;
+using System.Collections.Generic;
 
 namespace Portal.Infrastructure.Migrations
 {
-    public partial class InitDataBase : Migration
+    public partial class InitDB : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -14,13 +16,34 @@ namespace Portal.Infrastructure.Migrations
                     Id = table.Column<long>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Description = table.Column<string>(nullable: true),
+                    DisplayInMain = table.Column<bool>(nullable: false),
                     IsPrivate = table.Column<bool>(nullable: false),
+                    ParentId = table.Column<long>(nullable: true),
+                    PictureID = table.Column<bool>(nullable: false),
                     Priority = table.Column<int>(nullable: false),
                     Title = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Groups", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Pictures",
+                columns: table => new
+                {
+                    Id = table.Column<long>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    AltAttribute = table.Column<string>(nullable: true),
+                    IsNew = table.Column<bool>(nullable: false),
+                    MimeType = table.Column<string>(nullable: true),
+                    PictureBinary = table.Column<byte[]>(nullable: true),
+                    SeoFilename = table.Column<string>(nullable: true),
+                    TitleAttribute = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Pictures", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -59,6 +82,9 @@ namespace Portal.Infrastructure.Migrations
         {
             migrationBuilder.DropTable(
                 name: "Contents");
+
+            migrationBuilder.DropTable(
+                name: "Pictures");
 
             migrationBuilder.DropTable(
                 name: "Groups");

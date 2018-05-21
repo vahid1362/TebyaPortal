@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Portal.Web.Framework.ViewModel.Content;
 using QtasMarketing.Core.News;
 using QTasMarketing.Web.Framework.ViewModel.Content;
 

@@ -118,13 +118,7 @@ namespace Portal.core.Infrastructure
         /// <returns>The absolute path to the directory</returns>
         string GetAbsolutePath(params string[] paths);
 
-        /// <summary>
-        /// Gets a System.Security.AccessControl.DirectorySecurity object that encapsulates the access control list (ACL) entries for a specified directory
-        /// </summary>
-        /// <param name="path">The path to a directory containing a System.Security.AccessControl.DirectorySecurity object that describes the file's access control list (ACL) information</param>
-        /// <returns>An object that encapsulates the access control rules for the file described by the path parameter</returns>
-        DirectorySecurity GetAccessControl(string path);
-
+     
         /// <summary>
         /// Returns the creation date and time of the specified file or directory
         /// </summary>

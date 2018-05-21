@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
+using Portal.Infrastructure;
 using QtasMarketing.Core;
 using QtasMarketing.Core.Infrastructure;
 
@@ -8,9 +9,9 @@ namespace QtasMarketing.Infrastructure
 {
     public class EFRepository<T> : IRepository<T> where T : BaseEntity
     {
-        private readonly MarketingDbContext _marketingContext;
+        private readonly PortalDbContext _marketingContext;
 
-        public EFRepository(MarketingDbContext marketingContext)
+        public EFRepository(PortalDbContext marketingContext)
         {
             _marketingContext = marketingContext;
         }

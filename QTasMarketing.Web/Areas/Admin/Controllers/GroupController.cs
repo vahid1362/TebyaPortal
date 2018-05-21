@@ -11,9 +11,11 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Hosting.Internal;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Newtonsoft.Json;
 using NToastNotify;
 using Portal.Service;
+using Portal.Web.Framework.ViewModel.Content;
 using QtasMarketing.Core.News;
 using QtasMarketing.Services.News;
 using QTasMarketing.Web.Framework.ViewModel.Content;
@@ -60,16 +62,25 @@ namespace QTasMarketing.Web.Areas.Admin.Controllers
 
         public IActionResult Create()
         {
-            return View(new GroupViewModel());
+         var groups=   _newsService.GetGroups().Select(x => new SelectListItem()
+            {
+                Value = x.Id.ToString(),
+                Text = x.Title
+            }).ToList();
+            return View(new GroupViewModel()
+            {
+                AvaiableGroup = groups
+                
+            });
         }
 
 
+       
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Create(GroupViewModel groupViewModel )
         {
-
             if (ModelState.IsValid)
             {
                 var group = _mapper.Map<GroupViewModel, Group>(groupViewModel);

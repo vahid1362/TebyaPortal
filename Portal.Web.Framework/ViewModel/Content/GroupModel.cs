@@ -1,18 +1,25 @@
-﻿using System.ComponentModel;
+﻿using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using QTasMarketing.Web.Framework;
 
-namespace QTasMarketing.Web.Framework.ViewModel.Content
+namespace Portal.Web.Framework.ViewModel.Content
 {
 
 
    public class GroupViewModel:EntityBaseViewModel
-    {  
+    {
+        public GroupViewModel()
+        {
+            AvaiableGroup=new List<SelectListItem>();
+        }
         [Required(ErrorMessage = "وارد کردن عنوان ضروری است")]
         [DisplayName("عنوان")]
         public string Title { get; set; }
 
 
-        public long? ParentId { get; set; }
+        public string ParentId { get; set; }
 
         [Required(ErrorMessage = "وارد کردن الویت ضروری است")]
         [DisplayName("اولویت")]
@@ -24,6 +31,8 @@ namespace QTasMarketing.Web.Framework.ViewModel.Content
         [DisplayName("آیا خصوصصی باشد")]
         public bool IsPrivate { get; set; }
 
+        
+        public List<SelectListItem> AvaiableGroup { get; set; }
 
         public int? PictureId { get; set; }
        
