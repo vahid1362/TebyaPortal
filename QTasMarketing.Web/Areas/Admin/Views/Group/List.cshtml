@@ -1,6 +1,5 @@
 ﻿@using Kendo.Mvc.UI
 @using Portal.Web.Framework.ViewModel.Content
-@using QTasMarketing.Web.Framework.ViewModel.Content
 
 @{
     ViewData["Title"] = "List";
@@ -26,7 +25,7 @@
                           Columns(column =>
                           {
 
-                          column.Bound(c => c.Title);
+                          column.Bound(c => c.BreadCrumbName);
                           column.Bound(c => c.Description);
                           column.Bound(c => c.Priority);
 

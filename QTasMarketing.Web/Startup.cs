@@ -8,6 +8,7 @@ using Microsoft.Rest.Serialization;
 using Portal.Infrastructure;
 using Portal.Service;
 using Portal.Service.Media;
+using Portal.Service.News;
 using QtasMarketing.Core.Infrastructure;
 using QtasMarketing.Infrastructure;
 using QtasMarketing.Services.News;

@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace QTasMarketing.Web.Framework
+﻿namespace Portal.Web.Framework
 {
  public abstract   class EntityBaseViewModel
     {
 
-        public int Id { get; set; }
+        public long Id { get; set; }
     }
 }

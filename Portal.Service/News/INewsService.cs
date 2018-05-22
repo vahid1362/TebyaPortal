@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using QtasMarketing.Core.News;
+using Portal.core.News;
 
-namespace QtasMarketing.Services.News
+namespace Portal.Service.News
 {
     public interface INewsService
     {
@@ -22,6 +22,7 @@ namespace QtasMarketing.Services.News
         Group GetGroup(long id);
 
         void EditGroup(Group group);
+ 
 
         #endregion
 
@@ -30,5 +31,7 @@ namespace QtasMarketing.Services.News
         List<Content> GetContents();
 
         #endregion
+
+       
     }
 }

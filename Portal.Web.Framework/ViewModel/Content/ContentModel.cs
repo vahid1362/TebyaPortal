@@ -1,7 +1,9 @@
-﻿using System.ComponentModel;
+﻿using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
-namespace QTasMarketing.Web.Framework.ViewModel.Content
+namespace Portal.Web.Framework.ViewModel.Content
 {
     public  class ContentViewModel:EntityBaseViewModel
     {
@@ -28,5 +30,8 @@ namespace QTasMarketing.Web.Framework.ViewModel.Content
         public decimal Rate { get; set; }
 
         public long GroupId { get; set; }
+
+        public List<SelectListItem> SelectListItems { get; set; }
     }
-}
+    }
+

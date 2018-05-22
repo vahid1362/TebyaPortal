@@ -1,13 +1,15 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using AutoMapper;
 using Kendo.Mvc.Extensions;
 using Kendo.Mvc.UI;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using NToastNotify;
+using Portal.core.News;
+using Portal.Service.News;
 using Portal.Web.Framework.ViewModel.Content;
-using QtasMarketing.Core.News;
 using QtasMarketing.Services.News;
-using QTasMarketing.Web.Framework.ViewModel.Content;
 
 namespace QTasMarketing.Web.Areas.Admin.Controllers
 {
@@ -47,10 +49,23 @@ namespace QTasMarketing.Web.Areas.Admin.Controllers
 
         public IActionResult Create()
         {
-            return View(new ContentViewModel());
+            var groups = PrepareGroupSelectedListItem();
+            return View(new ContentViewModel()
+            {
+                SelectListItems = groups
+            });
         }
 
 
+        private List<SelectListItem> PrepareGroupSelectedListItem()
+        {
+            var groups = _newsService.GetGroups().Select(x => new SelectListItem()
+            {
+                Value = x.Id.ToString(),
+                Text = x.GetFormattedBreadCrumb(_newsService)
+            }).ToList();
+            return groups;
+        }
 
         [HttpPost]
         [ValidateAntiForgeryToken]

@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Portal.core.News;
+using Portal.Service.News;
 using QtasMarketing.Core.Infrastructure;
-using QtasMarketing.Core.News;
 
 namespace QtasMarketing.Services.News
 {
@@ -54,10 +55,14 @@ namespace QtasMarketing.Services.News
             _groupRepository.Update(group);
         }
 
+       
+
         public List<Content> GetContents()
         {
             return _contentRepository.TableNoTracking.ToList();
         }
+
+       
 
         #endregion
     }

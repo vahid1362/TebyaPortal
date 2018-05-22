@@ -1,5 +1,7 @@
 ﻿@using Kendo.Mvc.UI
-@model QTasMarketing.Web.Framework.ViewModel.Content.ContentViewModel
+@using Microsoft.AspNetCore.Razor.Language.Intermediate
+@using Portal.Web.Framework.ViewModel.Content
+@model Portal.Web.Framework.ViewModel.Content.ContentViewModel
 <div class="box-body">
     
     @Html.HiddenFor(x => x.Id)
@@ -9,14 +11,9 @@
             <div class="form-group">
                 @Html.Label("", "گروه والد", new { @class = "control-label col-md-1" })
                 <div class="col-md-6">
-                    @(Html.Kendo()
-                                          .DropDownList()
-                                          .Name("Groups")
-                                          .DataValueField("Id")
-                                          .DataTextField("Title")
-                                         .DataSource(datasource => datasource.Read(read => read.Action("ComboBox_Read", "Content"))).Events(events=>events.DataBound("onDataBound"))
-                                         .Value(Model.GroupId.ToString()) )
-                    )
+                   @Html.DropDownListFor(model=>model.GroupId,Model.SelectListItems, new {@class="form-control", Id="DropDown"})
+                    
+                
 
                 </div>
             </div>
@@ -63,4 +60,8 @@
         var defaultItem = e.sender.dataSource.at(0);
         e.sender.value(defaultItem.ProductID);
     }
+
+    $(function() {
+        $("#DropDown").select2();
+    });
 </script>

@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Portal.core.Media;
-using QtasMarketing.Core.News;
+using Portal.core.News;
 
 namespace Portal.Infrastructure
 {

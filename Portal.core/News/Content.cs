@@ -1,6 +1,7 @@
-﻿using QtasMarketing.CrossCutting.Enum;
+﻿using QtasMarketing.Core;
+using QtasMarketing.CrossCutting.Enum;
 
-namespace QtasMarketing.Core.News
+namespace Portal.core.News
 {
     public class Content : BaseEntity
     {

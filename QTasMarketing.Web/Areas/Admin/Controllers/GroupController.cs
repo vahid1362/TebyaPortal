@@ -14,11 +14,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Newtonsoft.Json;
 using NToastNotify;
+using Portal.core.News;
 using Portal.Service;
+using Portal.Service.News;
 using Portal.Web.Framework.ViewModel.Content;
-using QtasMarketing.Core.News;
 using QtasMarketing.Services.News;
-using QTasMarketing.Web.Framework.ViewModel.Content;
 
 namespace QTasMarketing.Web.Areas.Admin.Controllers
 {
@@ -31,13 +31,13 @@ namespace QTasMarketing.Web.Areas.Admin.Controllers
         private readonly INewsService _newsService;
         private readonly IToastNotification _toastNotification;
         private readonly IPictureService _pictureService;
-      
+
 
         #endregion
 
         #region Ctor
 
-        public GroupController(IMapper mapper, INewsService newsService,IPictureService pictureService, IToastNotification toastNotification)
+        public GroupController(IMapper mapper, INewsService newsService, IPictureService pictureService, IToastNotification toastNotification)
         {
             _mapper = mapper;
             _newsService = newsService;
@@ -48,7 +48,7 @@ namespace QTasMarketing.Web.Areas.Admin.Controllers
 
         #endregion
 
-                                                            
+
         public IActionResult Index()
         {
             return RedirectToAction("List");
@@ -62,24 +62,18 @@ namespace QTasMarketing.Web.Areas.Admin.Controllers
 
         public IActionResult Create()
         {
-         var groups=   _newsService.GetGroups().Select(x => new SelectListItem()
-            {
-                Value = x.Id.ToString(),
-                Text = x.Title
-            }).ToList();
+            var groups = PrepareGroupSelectedListItem();
             return View(new GroupViewModel()
             {
                 AvaiableGroup = groups
-                
+
             });
         }
-
-
-       
+        
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(GroupViewModel groupViewModel )
+        public IActionResult Create(GroupViewModel groupViewModel)
         {
             if (ModelState.IsValid)
             {
@@ -97,8 +91,6 @@ namespace QTasMarketing.Web.Areas.Admin.Controllers
             return View(new GroupViewModel());
         }
 
-
-        
         public IActionResult Edit(long? groupId)
         {
             if (groupId == null)
@@ -107,18 +99,20 @@ namespace QTasMarketing.Web.Areas.Admin.Controllers
             var group = _newsService.GetGroup(groupId.GetValueOrDefault());
 
             var groupViewModel = _mapper.Map<Group, GroupViewModel>(group);
+            var groups = PrepareGroupSelectedListItem();
 
-        
+            groupViewModel.AvaiableGroup = groups;
             return View(groupViewModel);
         }
+
 
         [HttpPost]
         public IActionResult Edit(GroupViewModel model)
         {
             if (model == null)
                 _toastNotification.AddErrorToastMessage("خطا در پار متر ورودی");
-            
-            var group = _mapper.Map<GroupViewModel,Group >(model);
+
+            var group = _mapper.Map<GroupViewModel, Group>(model);
 
             _newsService.EditGroup(group);
             _toastNotification.AddSuccessToastMessage("عملیات  با موفقیت صورت پذیرفت");
@@ -127,23 +121,31 @@ namespace QTasMarketing.Web.Areas.Admin.Controllers
         }
 
 
+        private List<SelectListItem> PrepareGroupSelectedListItem()
+        {
+            var groups = _newsService.GetGroups().Select(x => new SelectListItem()
+            {
+                Value = x.Id.ToString(),
+                Text = x.GetFormattedBreadCrumb(_newsService)
+            }).ToList();
+            return groups;
+        }
+
         public JsonResult Group_Read([DataSourceRequest] DataSourceRequest request)
         {
-            var groups = _newsService.GetGroups();
+            var groupViewModels = _newsService.GetGroups().Select(x => new GroupViewModel
+            {
+                Id = x.Id,
+                BreadCrumbName = x.GetFormattedBreadCrumb(_newsService),
+                Title = x.Title,
+                IsPrivate = x.IsPrivate,
+                Priority = x.Priority
+            }).ToList();
 
-            var groupsModel = _mapper.Map<List<Group>, List<GroupViewModel>>(groups);
-
-            return Json(groupsModel.ToDataSourceResult(request));
+            
+            return Json(groupViewModels.ToDataSourceResult(request));
         }
 
-        public JsonResult ComboBox_Read()
-        {
-            var groups = _newsService.GetGroups();
-
-            var groupsModel = _mapper.Map<List<Group>, List<GroupViewModel>>(groups);
-
-            return Json(groupsModel);
-        }
 
         public IActionResult Save(IFormFile file, int? pictureId)
         {
@@ -152,7 +154,7 @@ namespace QTasMarketing.Web.Areas.Admin.Controllers
 
                 var fileContent = ContentDispositionHeaderValue.Parse(file.ContentDisposition);
 
-              //  _pictureService.InsertPicture()
+                //  _pictureService.InsertPicture()
 
 
                 //Some browsers send file names with full path.
@@ -162,9 +164,10 @@ namespace QTasMarketing.Web.Areas.Admin.Controllers
 
                 //The files are not actually saved in this demo
             }
-           
+
             return Content("");
         }
+
         public ActionResult Remove(string[] fileNames)
         {
             // The parameter of the Remove action must be called "fileNames"

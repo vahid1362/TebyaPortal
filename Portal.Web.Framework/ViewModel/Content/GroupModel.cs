@@ -35,6 +35,10 @@ namespace Portal.Web.Framework.ViewModel.Content
         public List<SelectListItem> AvaiableGroup { get; set; }
 
         public int? PictureId { get; set; }
-       
+
+        [DisplayName("عنوان")]
+        public string  BreadCrumbName { get; set; }
+  
+
     }
 }

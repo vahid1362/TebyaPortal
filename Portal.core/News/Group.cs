@@ -1,4 +1,6 @@
-﻿namespace QtasMarketing.Core.News
+﻿using QtasMarketing.Core;
+
+namespace Portal.core.News
 {
     public class Group : BaseEntity
     {
