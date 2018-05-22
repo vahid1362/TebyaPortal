@@ -11,8 +11,8 @@
 
             <div class="form-group">
                 @Html.Label("", "گروه والد", new { @class = "control-label col-md-3" })
-                <div class="col-md-9">
-                   @Html.DropDownListFor(model=>model.ParentId,Model.AvaiableGroup ,new {})
+                <div class="col-md-5">
+                   @Html.DropDownListFor(model=>model.ParentId,Model.AvaiableGroup ,new {@class="form-control",Id="Dropdown"} )
 
                 </div>
             </div>
@@ -116,4 +116,7 @@
         $("#products").children().remove();
     }
 
+    $(function() {
+        $("#Dropdown").select2();
+    });
 </script>
