@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using Portal.core.News;
-using Portal.Service.News;
 using QtasMarketing.Core.Infrastructure;
 
-namespace QtasMarketing.Services.News
+namespace Portal.Service.News
 {
     public class NewsService : INewsService
     {
@@ -45,13 +43,14 @@ namespace QtasMarketing.Services.News
             return _groupRepository.TableNoTracking.ToList();
         }
 
-        public Group GetGroup(long id)
+        public Group GetGroupById(long id)
         {
             return _groupRepository.TableNoTracking.FirstOrDefault(x=>x.Id==id);
         }
 
         public void EditGroup(Group @group)
         {
+            
             _groupRepository.Update(group);
         }
 
@@ -62,7 +61,16 @@ namespace QtasMarketing.Services.News
             return _contentRepository.TableNoTracking.ToList();
         }
 
-       
+
+        public Content GetContentById( long id)
+        {
+            return _contentRepository.TableNoTracking.FirstOrDefault(x => x.Id == id);
+        }
+
+        public void EditContent(Content content)
+        {
+            throw new NotImplementedException();
+        }
 
         #endregion
     }

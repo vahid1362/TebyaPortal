@@ -58,7 +58,7 @@ namespace Portal.Service.News
 
                 alreadyProcessedCategoryIds.Add(group.Id);
 
-                group = newsService.GetGroup(group.ParentId.GetValueOrDefault());
+                group = newsService.GetGroupById(group.ParentId.GetValueOrDefault());
             }
             result.Reverse();
             return result;

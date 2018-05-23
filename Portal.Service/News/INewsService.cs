@@ -19,7 +19,7 @@ namespace Portal.Service.News
 
         void AddGroup(Group group);
 
-        Group GetGroup(long id);
+        Group GetGroupById(long id);
 
         void EditGroup(Group group);
  
@@ -30,8 +30,12 @@ namespace Portal.Service.News
 
         List<Content> GetContents();
 
+       Content GetContentById(long id);
+
+        void EditContent(Content content);
+
         #endregion
 
-       
+
     }
 }

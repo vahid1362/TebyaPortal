@@ -25,11 +25,11 @@
                           Columns(column =>
                           {
 
-                          column.Bound(c => c.BreadCrumbName);
-                          column.Bound(c => c.Description);
-                          column.Bound(c => c.Priority);
+                              column.Bound(c => c.BreadCrumbName);
+                              column.Bound(c => c.Description);
+                              column.Bound(c => c.Priority);
 
-                          column.Bound(c => c.IsPrivate);
+                              column.Bound(c => c.IsPrivate).Width(10).ClientTemplate("# if(IsPrivate) {# <i class='fa fa-check true-icon'></i> #} else {# <i class='fa fa-close false-icon'></i> #} #");
 
                               column.Bound(c => c.Id).Title("دستورات").ClientTemplate("<a  class='btn btn-warning' href='" + Url.Action("Edit") + "?GroupId=#=Id#'"+
                                "><i class=' fa fa-edit'></i>ویرایش</a>");

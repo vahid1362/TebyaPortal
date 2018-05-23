@@ -10,8 +10,17 @@ namespace QTasMarketing.Web.Extentions
         {
 
             #region Group
+
             CreateMap<GroupViewModel, Group>();
             CreateMap<Group, GroupViewModel>();
+
+            #endregion
+
+            #region Content
+
+            CreateMap<Content, ContentViewModel>();
+            CreateMap<ContentViewModel, Content>();
+
 
             #endregion
 

@@ -11,7 +11,7 @@ using Portal.Service.Media;
 using Portal.Service.News;
 using QtasMarketing.Core.Infrastructure;
 using QtasMarketing.Infrastructure;
-using QtasMarketing.Services.News;
+using QTasMarketing.Web.Extentions;
 
 namespace QTasMarketing.Web
 {
@@ -31,15 +31,25 @@ namespace QTasMarketing.Web
             {
                 c.UseSqlServer(Configuration.GetConnectionString("MarketingContext"));
             });
-          
+
+            var mapper = CreateMapperConfiguration();
+            services.AddSingleton(mapper);
             services.AddMvc().AddJsonOptions(options => options.SerializerSettings.ContractResolver = new ReadOnlyJsonContractResolver()).AddNToastNotifyToastr();
             services.AddKendo();
             services.AddTransient(typeof(IRepository<>), typeof(EFRepository<>));
             services.AddTransient<INewsService, NewsService>();
             services.AddTransient<IPictureService, PictureService>();
-            services.AddAutoMapper();
 
 
+
+        }
+
+        private static IMapper CreateMapperConfiguration()
+        {
+            var config = new MapperConfiguration(cfg => cfg.AddProfile(new MappingProfile()));
+
+            var mapper = config.CreateMapper();
+            return mapper;
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

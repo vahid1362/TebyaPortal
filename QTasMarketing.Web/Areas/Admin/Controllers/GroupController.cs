@@ -18,7 +18,6 @@ using Portal.core.News;
 using Portal.Service;
 using Portal.Service.News;
 using Portal.Web.Framework.ViewModel.Content;
-using QtasMarketing.Services.News;
 
 namespace QTasMarketing.Web.Areas.Admin.Controllers
 {
@@ -77,7 +76,7 @@ namespace QTasMarketing.Web.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                var group = _mapper.Map<GroupViewModel, Group>(groupViewModel);
+                var group = _mapper.Map<Group>(groupViewModel);
                 _newsService.AddGroup(group);
                 if (group.Id > 0)
                 {
@@ -94,11 +93,17 @@ namespace QTasMarketing.Web.Areas.Admin.Controllers
         public IActionResult Edit(long? groupId)
         {
             if (groupId == null)
+            {
                 _toastNotification.AddErrorToastMessage("خطا در پار متر ورودی");
+                RedirectToAction("List");
+            }
 
-            var group = _newsService.GetGroup(groupId.GetValueOrDefault());
+            var group = _newsService.GetGroupById(groupId.GetValueOrDefault());
 
-            var groupViewModel = _mapper.Map<Group, GroupViewModel>(group);
+            if (group == null)
+                RedirectToAction("List");
+
+            var groupViewModel = _mapper.Map<GroupViewModel>(group);
             var groups = PrepareGroupSelectedListItem();
 
             groupViewModel.AvaiableGroup = groups;
@@ -112,7 +117,12 @@ namespace QTasMarketing.Web.Areas.Admin.Controllers
             if (model == null)
                 _toastNotification.AddErrorToastMessage("خطا در پار متر ورودی");
 
-            var group = _mapper.Map<GroupViewModel, Group>(model);
+            var group = _newsService.GetGroupById(model.Id);
+
+            if (group == null)
+                RedirectToAction("List");
+
+             group = _mapper.Map<Group>(model);
 
             _newsService.EditGroup(group);
             _toastNotification.AddSuccessToastMessage("عملیات  با موفقیت صورت پذیرفت");

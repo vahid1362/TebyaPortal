@@ -27,7 +27,7 @@
 
                                   column.Bound(c => c.Title);
                                   column.Bound(c => c.Hit);
-                                  column.Bound(c => c.IsAllowedComment);
+                                  column.Bound(c => c.IsAllowedComment).Width(10).ClientTemplate("# if(IsAllowedComment) {# <i class='fa fa-check true-icon'></i> #} else {# <i class='fa fa-close false-icon'></i> #} #"); 
                                   column.Bound(c => c.Rate);
                                   column.Bound(c => c.Id).Title("دستورات").ClientTemplate("<a  class='btn btn-warning' href='" + Url.Action("Edit") + "?ContentId=#=Id#'"+
                                                                                           "><i class=' fa fa-edit'></i>ویرایش</a>");

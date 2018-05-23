@@ -10,7 +10,6 @@ using NToastNotify;
 using Portal.core.News;
 using Portal.Service.News;
 using Portal.Web.Framework.ViewModel.Content;
-using QtasMarketing.Services.News;
 
 namespace QTasMarketing.Web.Areas.Admin.Controllers
 {
@@ -95,30 +94,33 @@ namespace QTasMarketing.Web.Areas.Admin.Controllers
 
         public IActionResult Edit(long? contentId)
         {
-            //if (groupId == null)
-            //    _toastNotification.AddErrorToastMessage("خطا در پار متر ورودی");
+            if (contentId == null)
+                _toastNotification.AddErrorToastMessage("خطا در پار متر ورودی");
 
-            //var group = _newsService.GetGroup(groupId.GetValueOrDefault());
+            var content = _newsService.GetContents();
 
-            //var groupViewModel = _mapper.Map<Group, GroupViewModel>(group);
+            var contentViewModel = _mapper.Map<ContentViewModel>(content);
 
 
-            return View();
+            return View(contentViewModel);
         }
 
-        //[HttpPost]
-        //public IActionResult Edit(GroupViewModel model)
-        //{
-        //    //if (model == null)
-        //    //    _toastNotification.AddErrorToastMessage("خطا در پار متر ورودی");
+        [HttpPost]
+        public IActionResult Edit(ContentViewModel model)
+        {
+            if (model == null)
+                _toastNotification.AddErrorToastMessage("خطا در پار متر ورودی");
+            
+            var content = _newsService.GetContentById(model.Id);
+            if (content == null)
+                RedirectToAction("List");
+            content = _mapper.Map< Content>(model);
+            
+            _newsService.EditContent(content);
+            _toastNotification.AddSuccessToastMessage("عملیات  با موفقیت صورت پذیرفت");
 
-        //    //var group = _mapper.Map<GroupViewModel, Group>(model);
-
-        //    //_newsService.EditGroup(group);
-        //    //_toastNotification.AddSuccessToastMessage("عملیات  با موفقیت صورت پذیرفت");
-
-        //    return RedirectToAction("List");
-        //}
+            return RedirectToAction("List");
+        }
 
 
         public JsonResult Content_Read([DataSourceRequest] DataSourceRequest request)
