@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using AutoMapper;
 using Kendo.Mvc.Extensions;
@@ -74,7 +75,9 @@ namespace QTasMarketing.Web.Areas.Admin.Controllers
 
             if (ModelState.IsValid)
             {
-                var content = _mapper.Map<ContentViewModel, Content>(contentViewModel);
+               
+               var content = _mapper.Map<Content>(contentViewModel);
+              
                 _newsService.AddContent(content);
                 if (content.Id > 0)
                 {
@@ -85,7 +88,7 @@ namespace QTasMarketing.Web.Areas.Admin.Controllers
 
             }
 
-            return View(new ContentViewModel());
+            return RedirectToAction("List");
         }
 
 

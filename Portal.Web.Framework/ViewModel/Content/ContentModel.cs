@@ -1,33 +1,36 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using Microsoft.AspNetCore.Mvc.Rendering;
+using System.Web.Mvc;
+using SelectListItem = Microsoft.AspNetCore.Mvc.Rendering.SelectListItem;
 
 namespace Portal.Web.Framework.ViewModel.Content
 {
     public  class ContentViewModel:EntityBaseViewModel
     {
-        [Required(ErrorMessage = "این  فیلد ضروری است")]
         [DisplayName("عنوان")]
+        [Required(ErrorMessage = "این فیلد ضروری می باشد")]
         public string Title { get; set; }
 
         [DisplayName("لید")]
         public string Lead { get; set; }
 
-        [Required(ErrorMessage = "این  فیلد ضروری است")]
-        [DisplayName("متن")]
+        [Required(ErrorMessage = "این فیلد ضروری می باشد")]
         public string Body { get; set; }
 
-       
-        [Required(ErrorMessage = "این  فیلد ضروری است")]
         [DisplayName("قابل نظر دادن باشد")]
+        [AllowHtml]
         public bool IsAllowedComment { get; set; }
 
-        [DisplayName("تعداد بازدید")]
+        public bool Hidden { get; set; }
+
+        [DisplayName("میزان بازدید")]
         public int Hit { get; set; }
 
         [DisplayName("محبوبیت")]
         public decimal Rate { get; set; }
+
+       
 
         public long GroupId { get; set; }
 
