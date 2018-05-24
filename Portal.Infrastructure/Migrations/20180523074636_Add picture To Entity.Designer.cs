@@ -11,9 +11,10 @@ using System;
 namespace Portal.Infrastructure.Migrations
 {
     [DbContext(typeof(PortalDbContext))]
-    partial class PortalDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180523074636_Add picture To Entity")]
+    partial class AddpictureToEntity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -27,6 +28,8 @@ namespace Portal.Infrastructure.Migrations
 
                     b.Property<string>("AltAttribute");
 
+                    b.Property<long?>("ContentId");
+
                     b.Property<bool>("IsNew");
 
                     b.Property<string>("MimeType");
@@ -38,6 +41,8 @@ namespace Portal.Infrastructure.Migrations
                     b.Property<string>("TitleAttribute");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ContentId");
 
                     b.ToTable("Pictures");
                 });
@@ -70,24 +75,6 @@ namespace Portal.Infrastructure.Migrations
                     b.ToTable("Contents");
                 });
 
-            modelBuilder.Entity("Portal.core.News.ContentPicture", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<long>("ContentId");
-
-                    b.Property<long>("PictureId");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ContentId");
-
-                    b.HasIndex("PictureId");
-
-                    b.ToTable("ContentPictures");
-                });
-
             modelBuilder.Entity("Portal.core.News.Group", b =>
                 {
                     b.Property<long>("Id")
@@ -112,24 +99,18 @@ namespace Portal.Infrastructure.Migrations
                     b.ToTable("Groups");
                 });
 
+            modelBuilder.Entity("Portal.core.Media.Picture", b =>
+                {
+                    b.HasOne("Portal.core.News.Content")
+                        .WithMany("Pictures")
+                        .HasForeignKey("ContentId");
+                });
+
             modelBuilder.Entity("Portal.core.News.Content", b =>
                 {
                     b.HasOne("Portal.core.News.Group", "Group")
                         .WithMany()
                         .HasForeignKey("GroupId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("Portal.core.News.ContentPicture", b =>
-                {
-                    b.HasOne("Portal.core.News.Content", "Content")
-                        .WithMany("ContentPictures")
-                        .HasForeignKey("ContentId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("Portal.core.Media.Picture", "Picture")
-                        .WithMany()
-                        .HasForeignKey("PictureId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618

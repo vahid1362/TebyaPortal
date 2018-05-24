@@ -24,6 +24,11 @@
     <Folder Include="Areas\Admin\Data\" />
     <Folder Include="Areas\Admin\Models\" />
     <Folder Include="Views\Shared\EditorTemplate\" />
+    <Folder Include="wwwroot\shared\UserFiles\Images\New folder %282%29\" />
+    <Folder Include="wwwroot\shared\UserFiles\Images\New folder %283%29\" />
+    <Folder Include="wwwroot\shared\UserFiles\Images\New folder %284%29\" />
+    <Folder Include="wwwroot\shared\UserFiles\Images\New folder %285%29\" />
+    <Folder Include="wwwroot\shared\UserFiles\Images\New folder\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Portal.core\Portal.core.csproj" />

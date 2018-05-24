@@ -1,4 +1,6 @@
-﻿using QtasMarketing.Core;
+﻿using System.Collections.Generic;
+using Portal.core.Media;
+using QtasMarketing.Core;
 using QtasMarketing.CrossCutting.Enum;
 
 namespace Portal.core.News
@@ -8,6 +10,7 @@ namespace Portal.core.News
         public Content()
         {
             ContentStatus = ContentStatus.Sent;
+            ContentPictures=new HashSet<ContentPicture>();
         }
 
         public string Title { get; set; }
@@ -29,5 +32,7 @@ namespace Portal.core.News
         public long GroupId { get; set; }
 
         public ContentStatus ContentStatus { get; }
+
+        public ICollection<ContentPicture> ContentPictures { get; set; }
     }
 }
