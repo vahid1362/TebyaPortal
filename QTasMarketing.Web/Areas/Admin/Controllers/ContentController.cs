@@ -97,10 +97,12 @@ namespace QTasMarketing.Web.Areas.Admin.Controllers
             if (contentId == null)
                 _toastNotification.AddErrorToastMessage("خطا در پار متر ورودی");
 
-            var content = _newsService.GetContents();
+            var content = _newsService.GetContentById(contentId.GetValueOrDefault());
 
             var contentViewModel = _mapper.Map<ContentViewModel>(content);
-
+            var groups = PrepareGroupSelectedListItem();
+            
+            contentViewModel.SelectListItems = groups;
 
             return View(contentViewModel);
         }
@@ -115,7 +117,10 @@ namespace QTasMarketing.Web.Areas.Admin.Controllers
             if (content == null)
                 RedirectToAction("List");
             content = _mapper.Map< Content>(model);
-            
+
+         
+
+
             _newsService.EditContent(content);
             _toastNotification.AddSuccessToastMessage("عملیات  با موفقیت صورت پذیرفت");
 

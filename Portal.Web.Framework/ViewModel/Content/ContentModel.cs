@@ -8,6 +8,10 @@ namespace Portal.Web.Framework.ViewModel.Content
 {
     public  class ContentViewModel:EntityBaseViewModel
     {
+        public ContentViewModel()
+        {
+            SelectListItems=new List<SelectListItem>();
+        }
         [DisplayName("عنوان")]
         [Required(ErrorMessage = "این فیلد ضروری می باشد")]
         public string Title { get; set; }
@@ -31,7 +35,6 @@ namespace Portal.Web.Framework.ViewModel.Content
         public decimal Rate { get; set; }
 
        
-
         public long GroupId { get; set; }
 
         public List<SelectListItem> SelectListItems { get; set; }
