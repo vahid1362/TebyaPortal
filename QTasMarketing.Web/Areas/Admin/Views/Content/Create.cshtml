@@ -22,6 +22,10 @@
                 <div class="row">
                     <div class="text-left">
                         <button type="submit" class="btn btn-success"><i class="fa fa-save fa-lg"></i>ذخیره</button>
+                        <button type="submit" name="save-continue" class="btn bg-blue">
+                            <i class="fa fa-save fa-lg"></i>
+                           ذخیره و ادامه
+                        </button>
 
                         <a href="@Url.Action("List")" class="btn btn-default"><i class="fa fa-backward fa-lg"></i>بازگشت</a>
                     </div>
@@ -29,33 +33,31 @@
             </div>
             
             <div class="row">
-                <div class="col-md-12">
-                    <div class="nav-tabs-custom">
-                        <ul class="nav nav-tabs pull-right">
-                            <li class="active"><a href="#tab_content" data-toggle="tab" aria-expanded="True">محتوا</a></li>
-                            <li class=""><a href="#tab_picature" data-toggle="tab" aria-expanded="false">تصاویر</a></li>
-
-                        </ul>
-                        <div class="tab-content">
-                            <div class="tab-pane" id="tab_content">
-                                @Html.Partial("_CreateOrUpdate")
+             <div class="col-md-12">
+                        <!-- Custom Tabs (Pulled to the right) -->
+                        <div class="nav-tabs-custom">
+                            <ul class="nav nav-tabs pull-right">
+                                <li class="active"><a href="#tab_1-1" data-toggle="tab">محتوا</a></li>
+                                <li><a href="#tab_2-2" data-toggle="tab">تصاویر</a></li>
+                             
+                            </ul>
+                            <div class="tab-content">
+                                <div class="tab-pane active" id="tab_1-1">
+                                    @Html.Partial("_CreateOrUpdate")
+                                </div>
+                                <!-- /.tab-pane -->
+                                <div class="tab-pane" id="tab_2-2">
+                                 
+                                </div>
+                                <!-- /.tab-pane -->
+                                
+                                <!-- /.tab-pane -->
                             </div>
-                            <!-- /.tab-pane -->
-                            <div class="tab-pane" id="tab_picature">
-                                The European languages are members of the same family. Their separate existence is a myth.
-                                For science, music, sport, etc, Europe uses the same vocabulary. The languages only differ
-                                in their grammar, their pronunciation and their most common words. Everyone realizes why a
-                                new common language would be desirable: one could refuse to pay expensive translators. To
-                                achieve this, it would be necessary to have uniform grammar, pronunciation and more common
-                                words. If several languages coalesce, the grammar of the resulting language is more simple
-                                and regular than that of the individual languages.
-                            </div>
-
+                            <!-- /.tab-content -->
                         </div>
-                        <!-- /.tab-content -->
+                        <!-- nav-tabs-custom -->
                     </div>
-                </div>
-             
+                
             </div>
         </div>
         
