@@ -27,7 +27,33 @@
                     </div>
                 </div>
             </div>
-            @Html.Partial("_CreateOrUpdate")
+            <div class="row">
+                <div class="col-md-12">
+                    <!-- Custom Tabs (Pulled to the right) -->
+                    <div class="nav-tabs-custom">
+                        <ul class="nav nav-tabs pull-right">
+                            <li class="active"><a href="#tab_1-1" data-toggle="tab">محتوا</a></li>
+                            <li><a href="#tab_2-2" data-toggle="tab">تصاویر</a></li>
+                             
+                        </ul>
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="tab_1-1">
+                                @Html.Partial("_CreateOrUpdate")
+                            </div>
+                            <!-- /.tab-pane -->
+                            <div class="tab-pane" id="tab_2-2">
+                                @Html.Partial("_ContentPicture")
+                            </div>
+                            <!-- /.tab-pane -->
+                                
+                            <!-- /.tab-pane -->
+                        </div>
+                        <!-- /.tab-content -->
+                    </div>
+                    <!-- nav-tabs-custom -->
+                </div>
+                
+            </div>
         </div>
 
     </section>

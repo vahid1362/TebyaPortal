@@ -12,6 +12,11 @@ namespace Portal.core.News
 
         public long  ContentId { get; set; }
 
+        /// <summary>mv
+        /// Gets or sets the display order
+        /// </summary>
+        public int DisplayOrder { get; set; }
+
         public Picture Picture { get; set; }
 
         public Content Content { get; set; }

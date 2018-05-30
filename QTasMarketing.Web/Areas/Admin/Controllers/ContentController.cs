@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using NToastNotify;
 using Portal.core.News;
 using Portal.Service.News;
+using Portal.Web.Framework.Filters;
 using Portal.Web.Framework.ViewModel.Content;
 
 namespace QTasMarketing.Web.Areas.Admin.Controllers
@@ -67,9 +68,9 @@ namespace QTasMarketing.Web.Areas.Admin.Controllers
             return groups;
         }
 
-        [HttpPost]
+        [HttpPost, ParameterBasedOnFormName("save-continue", "continueEditing")]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(ContentViewModel contentViewModel)
+        public IActionResult Create(ContentViewModel contentViewModel,bool continueEditing)
         {
 
             if (ModelState.IsValid)
@@ -81,6 +82,12 @@ namespace QTasMarketing.Web.Areas.Admin.Controllers
                 if (content.Id > 0)
                 {
                     _toastNotification.AddSuccessToastMessage("عملیات  با موفقیت صورت پذیرفت");
+
+
+                    if (continueEditing)
+                    {
+                        return RedirectToAction("Edit", new {contentId = content.Id});
+                    }
                     return RedirectToAction("List");
                 }
                 _toastNotification.AddErrorToastMessage("خطا در انجام عملیات");

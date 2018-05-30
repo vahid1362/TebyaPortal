@@ -1,8 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using System.Web.Mvc;
-using SelectListItem = Microsoft.AspNetCore.Mvc.Rendering.SelectListItem;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Portal.Web.Framework.ViewModel.Content
 {
@@ -20,10 +19,11 @@ namespace Portal.Web.Framework.ViewModel.Content
         public string Lead { get; set; }
 
         [Required(ErrorMessage = "این فیلد ضروری می باشد")]
+        
         public string Body { get; set; }
 
         [DisplayName("قابل نظر دادن باشد")]
-        [AllowHtml]
+        
         public bool IsAllowedComment { get; set; }
 
         public bool Hidden { get; set; }
