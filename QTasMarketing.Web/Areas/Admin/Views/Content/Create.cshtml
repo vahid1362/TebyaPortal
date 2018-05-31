@@ -1,4 +1,4 @@
-﻿
+﻿@model QTasMarketing.Web.Areas.Admin.Models.Content.ContentViewModel
 @{
     ViewData["Title"] = "Create";
     Layout = "~/Views/Shared/_AdminLayOut.cshtml";
@@ -43,11 +43,11 @@
                             </ul>
                             <div class="tab-content">
                                 <div class="tab-pane active" id="tab_1-1">
-                                    @Html.Partial("_CreateOrUpdate")
+                                    @Html.Partial("_CreateOrUpdate",Model)
                                 </div>
                                 <!-- /.tab-pane -->
                                 <div class="tab-pane" id="tab_2-2">
-                                    @Html.Partial("_ContentPicture")
+                                    @Html.Partial("_CreateOrUpdate.Picture",Model)
                                 </div>
                                 <!-- /.tab-pane -->
                                 

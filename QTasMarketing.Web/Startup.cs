@@ -11,7 +11,7 @@ using Portal.Service.Media;
 using Portal.Service.News;
 using QtasMarketing.Core.Infrastructure;
 using QtasMarketing.Infrastructure;
-using QTasMarketing.Web.Extentions;
+using QTasMarketing.Web.Areas.Admin.Extentions;
 
 namespace QTasMarketing.Web
 {

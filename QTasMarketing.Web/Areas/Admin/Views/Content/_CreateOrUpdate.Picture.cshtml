@@ -1,0 +1,26 @@
+﻿@using Kendo.Mvc.UI
+@model QTasMarketing.Web.Areas.Admin.Models.Content.ContentViewModel
+<div class="panel-group">
+    <div class="panel panel-default">
+        <div class="panel-body">
+       
+        </div>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+           اضافه کردن تصویر جدید
+        </div>
+        <div class="panel-body">
+            <div class="form-group">
+                <div class="col-md-3">
+                    <label asp-for="AddContentPictureModel.PictureId"></label>
+                    <span asp-validation-for="AddContentPictureModel.PictureId"></span>
+                </div>
+                <div class="col-md-9">
+                    <input asp-for="AddContentPictureModel.PictureId" class="form-control" />
+                    <span asp-validation-for="AddContentPictureModel.PictureId"></span>
+                </div>
+            </div>
+         </div>
+    </div>
+</div>

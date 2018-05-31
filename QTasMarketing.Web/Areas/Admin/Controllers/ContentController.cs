@@ -10,7 +10,7 @@ using NToastNotify;
 using Portal.core.News;
 using Portal.Service.News;
 using Portal.Web.Framework.Filters;
-using Portal.Web.Framework.ViewModel.Content;
+using QTasMarketing.Web.Areas.Admin.Models.Content;
 
 namespace QTasMarketing.Web.Areas.Admin.Controllers
 {

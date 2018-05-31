@@ -1,9 +1,6 @@
 ﻿using Portal.core.Media;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace Portal.Service
+namespace Portal.Service.Media
 {
    public interface IPictureService
     {
@@ -12,5 +9,9 @@ namespace Portal.Service
             string altAttribute = null, string titleAttribute = null,
             bool isNew = true, bool validateBinary = true);
         #endregion
+
+        object GetPictureUrl(int model, int pictureSize, bool b);
+        object GetDefaultPictureUrl(int pictureSize);
+        object GetPictureById(int model);
     }
 }

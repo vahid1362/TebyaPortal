@@ -3,13 +3,15 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
-namespace Portal.Web.Framework.ViewModel.Content
+namespace QTasMarketing.Web.Areas.Admin.Models.Content
 {
     public  class ContentViewModel:EntityBaseViewModel
     {
         public ContentViewModel()
         {
             SelectListItems=new List<SelectListItem>();
+            ContentPictureModels=new List<ContentPictureModel>();
+            AddContentPictureModel=new ContentPictureModel();
         }
         [DisplayName("عنوان")]
         [Required(ErrorMessage = "این فیلد ضروری می باشد")]
@@ -38,6 +40,29 @@ namespace Portal.Web.Framework.ViewModel.Content
         public long GroupId { get; set; }
 
         public List<SelectListItem> SelectListItems { get; set; }
+
+        public ContentPictureModel AddContentPictureModel { get; set; }
+
+        public List<ContentPictureModel> ContentPictureModels { get; set; }
+
+
     }
+
+
+    public  class ContentPictureModel : EntityBaseViewModel
+    {
+        public int ContentId { get; set; }
+
+    
+        public int PictureId { get; set; }
+
+  
+        public string PictureUrl { get; set; }
+
+  
+        public int DisplayOrder { get; set; }
+
+  
     }
+}
 

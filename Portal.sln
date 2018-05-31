@@ -21,7 +21,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Portal.Service", "Portal.Se
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Portal.Web.Framework", "Portal.Web.Framework\Portal.Web.Framework.csproj", "{5C3CBD6B-251C-4073-BE63-CA8A54D1556C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServicesTest", "ServicesTest\ServicesTest.csproj", "{6327F3EB-826C-4938-BC1E-F2E43F9E8985}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ServicesTest", "ServicesTest\ServicesTest.csproj", "{6327F3EB-826C-4938-BC1E-F2E43F9E8985}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

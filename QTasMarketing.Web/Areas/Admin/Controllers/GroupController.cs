@@ -16,8 +16,9 @@ using Newtonsoft.Json;
 using NToastNotify;
 using Portal.core.News;
 using Portal.Service;
+using Portal.Service.Media;
 using Portal.Service.News;
-using Portal.Web.Framework.ViewModel.Content;
+using QTasMarketing.Web.Areas.Admin.Models.Content;
 
 namespace QTasMarketing.Web.Areas.Admin.Controllers
 {

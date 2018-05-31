@@ -1,4 +1,4 @@
-﻿namespace QTasMarketing.Web.Framework.ViewModel.Memebership
+﻿namespace QTasMarketing.Web.Areas.Admin.Models.Memebership
 {
     public class LoginViewModel
     {

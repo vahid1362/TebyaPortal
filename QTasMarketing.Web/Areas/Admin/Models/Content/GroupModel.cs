@@ -2,9 +2,8 @@
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using QTasMarketing.Web.Framework;
 
-namespace Portal.Web.Framework.ViewModel.Content
+namespace QTasMarketing.Web.Areas.Admin.Models.Content
 {
 
 

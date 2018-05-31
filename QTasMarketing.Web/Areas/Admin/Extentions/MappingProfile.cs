@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
 using Portal.core.News;
-using Portal.Web.Framework.ViewModel.Content;
+using QTasMarketing.Web.Areas.Admin.Models.Content;
 
-namespace QTasMarketing.Web.Extentions
+namespace QTasMarketing.Web.Areas.Admin.Extentions
 {
     public class MappingProfile:Profile
     {

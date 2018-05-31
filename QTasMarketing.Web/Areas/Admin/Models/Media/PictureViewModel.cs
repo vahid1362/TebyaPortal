@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using QTasMarketing.Web.Framework;
-
-namespace Portal.Web.Framework.Media
+﻿namespace QTasMarketing.Web.Areas.Admin.Models.Media
 {
    public class PictureViewModel:EntityBaseViewModel
     {

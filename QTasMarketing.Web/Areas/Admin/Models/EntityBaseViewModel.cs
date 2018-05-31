@@ -1,4 +1,4 @@
-﻿namespace Portal.Web.Framework
+﻿namespace QTasMarketing.Web.Areas.Admin.Models
 {
  public abstract   class EntityBaseViewModel
     {

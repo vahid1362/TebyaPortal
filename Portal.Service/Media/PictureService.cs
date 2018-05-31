@@ -57,6 +57,21 @@ namespace Portal.Service.Media
             return picture;
         }
 
+        public object GetPictureUrl(int model, int pictureSize, bool b)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public object GetDefaultPictureUrl(int pictureSize)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public object GetPictureById(int model)
+        {
+            throw new System.NotImplementedException();
+        }
+
         private byte[] ValidatePicture(byte[] pictureBinary, string mimeType)
         {
             using (var destStream = new MemoryStream())
