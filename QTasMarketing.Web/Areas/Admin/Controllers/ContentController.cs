@@ -1,13 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using AutoMapper;
 using Kendo.Mvc.Extensions;
 using Kendo.Mvc.UI;
+using Microsoft.AspNetCore.Hosting.Internal;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.Net.Http.Headers;
 using NToastNotify;
 using Portal.core.News;
+using Portal.Service.Media;
 using Portal.Service.News;
 using Portal.Web.Framework.Filters;
 using QTasMarketing.Web.Areas.Admin.Models.Content;
@@ -22,17 +27,19 @@ namespace QTasMarketing.Web.Areas.Admin.Controllers
         private readonly IMapper _mapper;
         private readonly INewsService _newsService;
         private readonly IToastNotification _toastNotification;
+        private readonly IPictureService _pictureService;
 
 
         #endregion
 
         #region  Ctor
 
-        public ContentController(INewsService newsService, IMapper mapper, IToastNotification toastNotification)
+        public ContentController(INewsService newsService, IMapper mapper, IToastNotification toastNotification, IPictureService pictureService)
         {
             _newsService = newsService;
             _mapper = mapper;
             _toastNotification = toastNotification;
+            _pictureService = pictureService;
         }
 
 
@@ -153,8 +160,38 @@ namespace QTasMarketing.Web.Areas.Admin.Controllers
             return Json(groupsModel);
         }
 
+        public ActionResult Save(IFormFile file,int? pictureId)
+        {
+            // The Name of the Upload component is "files"
+            if (file != null)
+            {
 
-      
+                using (var memoryStream = new MemoryStream())
+                {
+                   file.CopyTo(memoryStream);
+                    var imageBytes = memoryStream.ToArray();
+                    _pictureService.InsertPicture(imageBytes, "image", "Test1");
+
+                }
+
+                  
+              
+                    var fileContent = ContentDispositionHeaderValue.Parse(file.ContentDisposition);
+
+                    // Some browsers send file names with full path.
+                    // We are only interested in the file name.
+                    var fileName = Path.GetFileName(fileContent.FileName.ToString().Trim('"'));
+               
+
+                    // The files are not actually saved in this demo
+                    //file.SaveAs(physicalPath);
+              
+            }
+
+            // Return an empty string to signify success
+            return Content("");
+        }
+
 
     }
 }

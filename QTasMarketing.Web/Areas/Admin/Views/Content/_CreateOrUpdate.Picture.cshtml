@@ -8,7 +8,7 @@
     </div>
     <div class="panel panel-default">
         <div class="panel-heading">
-           اضافه کردن تصویر جدید
+            اضافه کردن تصویر جدید
         </div>
         <div class="panel-body">
             <div class="form-group">
@@ -16,11 +16,60 @@
                     <label asp-for="AddContentPictureModel.PictureId"></label>
                     <span asp-validation-for="AddContentPictureModel.PictureId"></span>
                 </div>
-                <div class="col-md-9">
-                    <input asp-for="AddContentPictureModel.PictureId" class="form-control" />
-                    <span asp-validation-for="AddContentPictureModel.PictureId"></span>
+                <div class="col-md-4">
+                    @(Html.Kendo().Upload()
+                          .Name("files")
+                          .Async(a => a
+                              .Save("Save", "Content",new {Model.AddContentPictureModel.PictureId})
+                              .Remove("Remove", "Content")
+                              .AutoUpload(true)
+                          )
+                          .Events(events => events
+
+                              .Remove("onRemove")
+
+                              .Success("onSuccess")
+
+                          ).Multiple(false)
+
+
+                          .Validation(validation =>
+                          {
+                              validation.AllowedExtensions(new string[] { ".jpg", ".jpeg", ".png", ".bmp", ".gif" });
+                              validation.MinFileSize(500);
+                          }))
+
+                </div>
+                <div class="col-md-5">
+                    <div id="products"></div>
                 </div>
             </div>
-         </div>
+        </div>
     </div>
 </div>
+<script>
+    function onSuccess(e) {
+        if (e.operation == "upload") {
+            for (var i = 0; i < e.files.length; i++) {
+                var file = e.files[i].rawFile;
+
+                if (file) {
+                    var reader = new FileReader();
+
+                    reader.onloadend = function () {
+                        $("<div class='product'><img src=" + this.result + " /></div>").appendTo($("#products"));
+                    };
+
+                    reader.readAsDataURL(file);
+                }
+            }
+        }
+    }
+
+    function onRemove(e) {
+
+        $("#products").children().remove();
+    }
+
+   
+</script>
