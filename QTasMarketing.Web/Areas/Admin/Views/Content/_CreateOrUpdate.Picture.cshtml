@@ -1,53 +1,68 @@
 ﻿@using Kendo.Mvc.UI
 @model QTasMarketing.Web.Areas.Admin.Models.Content.ContentViewModel
-<div class="panel-group">
-    <div class="panel panel-default">
-        <div class="panel-body">
-       
+<form method="post"
+      asp-controller="TestAjax"
+      asp-action="Index"
+        class="form-horizontal"
+    role="form"
+    data-ajax="true"
+    data-ajax-loading="#Progress"
+    data-ajax-success="myJsMethod">
+
+
+    <div class="panel-group">
+        <div class="panel panel-default">
+            <div class="panel-body">
+
+            </div>
         </div>
-    </div>
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            اضافه کردن تصویر جدید
-        </div>
-        <div class="panel-body">
-            <div class="form-group">
-                <div class="col-md-3">
-                    <label asp-for="AddContentPictureModel.PictureId"></label>
-                    <span asp-validation-for="AddContentPictureModel.PictureId"></span>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                اضافه کردن تصویر جدید
+            </div>
+            <div class="panel-body">
+                <div class="form-group">
+                    <div class="col-md-5  col-md-offset-3">
+                        <div id="images"></div>
+                    </div>
                 </div>
-                <div class="col-md-4">
-                    @(Html.Kendo().Upload()
-                          .Name("files")
-                          .Async(a => a
-                              .Save("Save", "Content",new {Model.AddContentPictureModel.PictureId})
-                              .Remove("Remove", "Content")
-                              .AutoUpload(true)
-                          )
-                          .Events(events => events
+                <div class="form-group">
+                    <div class="col-md-3">
+                        <label asp-for="AddContentPictureModel.PictureId"></label>
+                    </div>
+                    <div class="col-md-4">
+                        @(Html.Kendo().Upload()
+                                                      .Name("files")
+                                                      .Async(a => a
+                                                          .Save("Save", "Content", new { Model.AddContentPictureModel.Image })
+                                                          .Remove("Remove", "Content")
+                                                          .AutoUpload(true))
+                                                      .Events(events => events
+                                                      .Remove("onRemove")
+                                                      .Success("onSuccess")
+                                                      ).Multiple(false)
+                                                      .Validation(validation =>
+                                                      {
+                                                          validation.AllowedExtensions(new string[] { ".jpg", ".jpeg", ".png", ".bmp", ".gif" });
+                                                          validation.MinFileSize(500);
+                                                      }))
 
-                              .Remove("onRemove")
-
-                              .Success("onSuccess")
-
-                          ).Multiple(false)
-
-
-                          .Validation(validation =>
-                          {
-                              validation.AllowedExtensions(new string[] { ".jpg", ".jpeg", ".png", ".bmp", ".gif" });
-                              validation.MinFileSize(500);
-                          }))
+                    </div>
 
                 </div>
-                <div class="col-md-5">
-                    <div id="products"></div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.AddContentPictureModel.DisplayOrder, new { @class = "control-label col-md-3" })
+                    <div class="col-md-5">
+                        @Html.EditorFor(model => model.AddContentPictureModel.DisplayOrder, new { @class = "form-control col-md-3" })
+                    </div>
+
                 </div>
             </div>
         </div>
     </div>
-</div>
-<script>
+    <button type="submit"   class="btn btn-primary" >ذخیره</button>
+    </form>
+    <script>
     function onSuccess(e) {
         if (e.operation == "upload") {
             for (var i = 0; i < e.files.length; i++) {
@@ -57,7 +72,7 @@
                     var reader = new FileReader();
 
                     reader.onloadend = function () {
-                        $("<div class='product'><img src=" + this.result + " /></div>").appendTo($("#products"));
+                        $("<div ><img class='imageUpload' src=" + this.result + " /></div>").appendTo($("#images"));
                     };
 
                     reader.readAsDataURL(file);
@@ -68,8 +83,31 @@
 
     function onRemove(e) {
 
-        $("#products").children().remove();
+        $("#images").children().remove();
     }
+    $("#SavePicture").click(function () {
 
-   
-</script>
+
+        $.ajax({
+            url: '/Admin/Content/MainAddressDetails',
+            type: 'POST',
+            contentType: "application/json; charset=utf-8",
+            dataType: 'json',
+            data: @Model,
+            success: function (data) {
+                alert(data.success);
+            },
+            error: function () {
+                alert("Error");
+            }
+        });
+
+    })
+    </script>
+    <style>
+
+        .imageUpload {
+            width: 100px;
+            height: 120px;
+        }
+    </style>

@@ -59,8 +59,10 @@ namespace QTasMarketing.Web.Areas.Admin.Models.Content
   
         public string PictureUrl { get; set; }
 
-  
+       [DisplayName("اولویت")]
         public int DisplayOrder { get; set; }
+
+        public  byte[] Image { get; set; }
 
   
     }

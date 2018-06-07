@@ -34,7 +34,8 @@ namespace QTasMarketing.Web.Areas.Admin.Controllers
 
         #region  Ctor
 
-        public ContentController(INewsService newsService, IMapper mapper, IToastNotification toastNotification, IPictureService pictureService)
+        public ContentController(INewsService newsService, IMapper mapper, IToastNotification toastNotification,
+            IPictureService pictureService)
         {
             _newsService = newsService;
             _mapper = mapper;
@@ -44,6 +45,7 @@ namespace QTasMarketing.Web.Areas.Admin.Controllers
 
 
         #endregion
+
         public IActionResult Index()
         {
             return RedirectToAction("List");
@@ -77,14 +79,14 @@ namespace QTasMarketing.Web.Areas.Admin.Controllers
 
         [HttpPost, ParameterBasedOnFormName("save-continue", "continueEditing")]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(ContentViewModel contentViewModel,bool continueEditing)
+        public IActionResult Create(ContentViewModel contentViewModel, bool continueEditing)
         {
 
             if (ModelState.IsValid)
             {
-               
-               var content = _mapper.Map<Content>(contentViewModel);
-              
+
+                var content = _mapper.Map<Content>(contentViewModel);
+
                 _newsService.AddContent(content);
                 if (content.Id > 0)
                 {
@@ -93,10 +95,12 @@ namespace QTasMarketing.Web.Areas.Admin.Controllers
 
                     if (continueEditing)
                     {
-                        return RedirectToAction("Edit", new {contentId = content.Id});
+                        return RedirectToAction("Edit", new { contentId = content.Id });
                     }
+
                     return RedirectToAction("List");
                 }
+
                 _toastNotification.AddErrorToastMessage("خطا در انجام عملیات");
 
             }
@@ -115,7 +119,7 @@ namespace QTasMarketing.Web.Areas.Admin.Controllers
 
             var contentViewModel = _mapper.Map<ContentViewModel>(content);
             var groups = PrepareGroupSelectedListItem();
-            
+
             contentViewModel.SelectListItems = groups;
 
             return View(contentViewModel);
@@ -126,13 +130,13 @@ namespace QTasMarketing.Web.Areas.Admin.Controllers
         {
             if (model == null)
                 _toastNotification.AddErrorToastMessage("خطا در پار متر ورودی");
-            
+
             var content = _newsService.GetContentById(model.Id);
             if (content == null)
                 RedirectToAction("List");
-            content = _mapper.Map< Content>(model);
+            content = _mapper.Map<Content>(model);
 
-         
+
 
 
             _newsService.EditContent(content);
@@ -160,37 +164,35 @@ namespace QTasMarketing.Web.Areas.Admin.Controllers
             return Json(groupsModel);
         }
 
-        public ActionResult Save(IFormFile file,int? pictureId)
+        public ActionResult Save(IEnumerable<IFormFile> files, byte[] imageByteArray)
         {
-            // The Name of the Upload component is "files"
-            if (file != null)
+
+            foreach (var file in files)
             {
-
-                using (var memoryStream = new MemoryStream())
+                // The Name of the Upload component is "files"
+                if (file != null)
                 {
-                   file.CopyTo(memoryStream);
-                    var imageBytes = memoryStream.ToArray();
-                    _pictureService.InsertPicture(imageBytes, "image", "Test1");
 
+                    using (var memoryStream = new MemoryStream())
+                    {
+                        file.CopyTo(memoryStream);
+                        var imageBytes = memoryStream.ToArray();
+                        imageByteArray = imageBytes;
+
+                    }
                 }
-
-                  
-              
-                    var fileContent = ContentDispositionHeaderValue.Parse(file.ContentDisposition);
-
-                    // Some browsers send file names with full path.
-                    // We are only interested in the file name.
-                    var fileName = Path.GetFileName(fileContent.FileName.ToString().Trim('"'));
-               
-
-                    // The files are not actually saved in this demo
-                    //file.SaveAs(physicalPath);
-              
             }
+
 
             // Return an empty string to signify success
             return Content("");
         }
+
+        public JsonResult SavePicture(ContentPictureModel model)
+        {
+            return Json(new { success = true });
+        }
+
 
 
     }
