@@ -53,7 +53,7 @@ namespace QTasMarketing.Web.Areas.Admin.Models.Content
     {
         public int ContentId { get; set; }
 
-    
+         [UIHint("Picture")]
         public int PictureId { get; set; }
 
   

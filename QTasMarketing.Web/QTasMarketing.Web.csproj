@@ -124,7 +124,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Admin\Data\" />
-    <Folder Include="Views\Shared\EditorTemplate\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="bower_components\bootstrap\CHANGELOG.md" />
