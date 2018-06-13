@@ -11,21 +11,19 @@ namespace Portal.Service.Media
 {
     public class PictureService : IPictureService
     {
-        private IRepository<Picture> pictureRepository;
+        private IRepository<Picture> _pictureRepository;
         private readonly MediaSettings _mediaSettings;
 
-        public MediaSettings MediaSettings => _mediaSettings;
+            //  public MediaSettings MediaSettings => _mediaSettings;
 
-        public IRepository<Picture> PictureRepository
-        {
-            get => pictureRepository;
-            set => pictureRepository = value;
-        }
 
         #region Ctor
 
-        public PictureService(IRepository<Picture> pictureRepository) => PictureRepository = pictureRepository;
-
+        public PictureService(IRepository<Picture> pictureRepository)
+        {
+           _pictureRepository = pictureRepository;
+           // _mediaSettings = mediaSettings;
+        }
 
         #endregion
 
@@ -51,7 +49,7 @@ namespace Portal.Service.Media
                 TitleAttribute = titleAttribute,
                 IsNew = isNew,
             };
-            PictureRepository.Insert(picture);
+            _pictureRepository.Insert(picture);
 
 
             return picture;
@@ -67,9 +65,9 @@ namespace Portal.Service.Media
             throw new System.NotImplementedException();
         }
 
-        public object GetPictureById(int model)
+        public Picture GetPictureById(long model)
         {
-            throw new System.NotImplementedException();
+            return _pictureRepository.GetById(model);
         }
 
         private byte[] ValidatePicture(byte[] pictureBinary, string mimeType)

@@ -12,6 +12,6 @@ namespace Portal.Service.Media
 
         object GetPictureUrl(int model, int pictureSize, bool b);
         object GetDefaultPictureUrl(int pictureSize);
-        object GetPictureById(int model);
+        Picture GetPictureById(long model);
     }
 }

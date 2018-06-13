@@ -124,6 +124,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Admin\Data\" />
+    <Folder Include="Views\Shared\EditorTemplate\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="bower_components\bootstrap\CHANGELOG.md" />
@@ -602,5 +603,10 @@
     <Reference Include="Kendo.Mvc">
       <HintPath>C:\Users\vahid\Desktop\Kendo.Mvc.dll</HintPath>
     </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Update="Areas\Admin\Views\Shared\EditorTemplates\Picture.cshtml">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
   </ItemGroup>
 </Project>
