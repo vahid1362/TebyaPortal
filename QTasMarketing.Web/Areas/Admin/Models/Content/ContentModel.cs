@@ -5,13 +5,13 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace QTasMarketing.Web.Areas.Admin.Models.Content
 {
-    public  class ContentViewModel:EntityBaseViewModel
+    public class ContentViewModel : EntityBaseViewModel
     {
         public ContentViewModel()
         {
-            SelectListItems=new List<SelectListItem>();
-            ContentPictureModels=new List<ContentPictureModel>();
-            AddContentPictureModel=new ContentPictureModel();
+            SelectListItems = new List<SelectListItem>();
+            ContentPictureModels = new List<ContentPictureModel>();
+            AddContentPictureModel = new ContentPictureModel();
         }
         [DisplayName("عنوان")]
         [Required(ErrorMessage = "این فیلد ضروری می باشد")]
@@ -21,11 +21,11 @@ namespace QTasMarketing.Web.Areas.Admin.Models.Content
         public string Lead { get; set; }
 
         [Required(ErrorMessage = "این فیلد ضروری می باشد")]
-        
+
         public string Body { get; set; }
 
         [DisplayName("قابل نظر دادن باشد")]
-        
+
         public bool IsAllowedComment { get; set; }
 
         public bool Hidden { get; set; }
@@ -36,7 +36,7 @@ namespace QTasMarketing.Web.Areas.Admin.Models.Content
         [DisplayName("محبوبیت")]
         public decimal Rate { get; set; }
 
-       
+
         public long GroupId { get; set; }
 
         public List<SelectListItem> SelectListItems { get; set; }
@@ -49,22 +49,20 @@ namespace QTasMarketing.Web.Areas.Admin.Models.Content
     }
 
 
-    public  class ContentPictureModel : EntityBaseViewModel
+    public class ContentPictureModel : EntityBaseViewModel
     {
         public int ContentId { get; set; }
 
-         [UIHint("Picture")]
         public long PictureId { get; set; }
 
-  
         public string PictureUrl { get; set; }
 
-       [DisplayName("اولویت")]
+        [DisplayName("اولویت")]
         public int DisplayOrder { get; set; }
 
-        public  byte[] Image { get; set; }
+        public byte[] Image { get; set; }
 
-  
+
     }
 }
 

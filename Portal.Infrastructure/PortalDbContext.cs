@@ -22,6 +22,7 @@ namespace Portal.Infrastructure
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+           
             modelBuilder.Entity<Content>().HasOne(x => x.Group);
             modelBuilder.Entity<ContentPicture>().HasOne(x => x.Picture).WithMany().HasForeignKey(x=>x.PictureId);
             modelBuilder.Entity<ContentPicture>().HasOne(x => x.Content).WithMany(x => x.ContentPictures).HasForeignKey(x=>x.ContentId);

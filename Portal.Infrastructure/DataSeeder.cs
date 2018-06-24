@@ -1,4 +1,4 @@
-﻿namespace QtasMarketing.Infrastructure
+﻿namespace Portal.Infrastructure
 {
     public class DataSeeder
     {
