@@ -12,15 +12,12 @@ namespace QTasMarketing.Web.Controllers
     [Authorize]
     public class UserController : Controller
     {
-        private readonly UserManager<User> _userManager;
+        private readonly UserManager<AppUser> _userManager;
 
         #region Ctor
 
-        public UserController(UserManager<User> userManager)
-        {
-            _userManager = userManager;
-        }
-        
+        public UserController(UserManager<AppUser> userManager) => _userManager = userManager;
+
 
         #endregion
         public IActionResult Index()

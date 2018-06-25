@@ -8,10 +8,10 @@ namespace ServicesTest
 {
     public class UserServiceTest
     {
-        private UserManager<User> _userManager;
+        private UserManager<AppUser> _userManager;
 
 
-        public UserServiceTest(UserManager<User> userManager )
+        public UserServiceTest(UserManager<AppUser> userManager )
         {
             _userManager = userManager;
         }
@@ -20,7 +20,7 @@ namespace ServicesTest
         {
             var userService = new UserService(_userManager);
 
-            userService.CreateUser(new User()
+            userService.CreateUser(new AppUser()
             {
                 UserName = "vahid",
                 PasswordHash = "123456"

@@ -2,8 +2,9 @@
 
 namespace Portal.core.Membership
 {
-    public class User:IdentityUser
+    public class AppUser:IdentityUser
     {
+       
 
     }
 }

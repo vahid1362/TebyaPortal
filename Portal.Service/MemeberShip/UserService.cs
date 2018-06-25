@@ -9,11 +9,11 @@ namespace Portal.Service.MemeberShip
 {
  public   class UserService
     {
-        private readonly UserManager<User> _userManager;
+        private readonly UserManager<AppUser> _userManager;
 
         #region Ctor
 
-        public UserService(UserManager<User> userManager)
+        public UserService(UserManager<AppUser> userManager)
         {
             _userManager = userManager;
         }
@@ -21,12 +21,12 @@ namespace Portal.Service.MemeberShip
         #endregion
 
 
-        public List<User> GetUsers()
+        public List<AppUser> GetUsers()
         {
             return _userManager.Users.ToList();
         }
 
-        public void CreateUser(User user)
+        public void CreateUser(AppUser user)
         {
             var result=_userManager.CreateAsync(user);
         }

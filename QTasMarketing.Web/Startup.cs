@@ -30,6 +30,10 @@ namespace QTasMarketing.Web
             {
                 c.UseSqlServer(Configuration.GetConnectionString("MarketingContext"));
             });
+            services.AddDbContext<PortaIIdentityContext>(c =>
+            {
+                c.UseSqlServer(Configuration.GetConnectionString("IdentityContext"));
+            });
 
             var mapper = CreateMapperConfiguration();
             services.AddSingleton(mapper);
