@@ -1,11 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
-using Portal.Infrastructure;
-using QtasMarketing.Core;
-using QtasMarketing.Core.Infrastructure;
+using Portal.core;
+using Portal.core.Infrastructure;
 
-namespace QtasMarketing.Infrastructure
+namespace Portal.Infrastructure
 {
     public class EFRepository<T> : IRepository<T> where T : BaseEntity
     {

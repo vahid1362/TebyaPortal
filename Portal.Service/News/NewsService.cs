@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Portal.core.Infrastructure;
 using Portal.core.News;
-using QtasMarketing.Core.Infrastructure;
 
 namespace Portal.Service.News
 {
@@ -15,9 +15,7 @@ namespace Portal.Service.News
             _contentRepository = contentRepository;
             _groupRepository = groupRepository;
         }
-
-
-
+        
 
         #region Content
      

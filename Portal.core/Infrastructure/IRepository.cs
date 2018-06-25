@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
-namespace QtasMarketing.Core.Infrastructure
+namespace Portal.core.Infrastructure
 {
    public  interface IRepository<T> where T:BaseEntity
     {

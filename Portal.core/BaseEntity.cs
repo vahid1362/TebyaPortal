@@ -1,14 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
+using System.ComponentModel.DataAnnotations.Schema;
 
-namespace QtasMarketing.Core
+namespace Portal.core
 {
    public abstract class BaseEntity
     {
         /// <summary>
         /// Gets or sets the entity identifier
         /// </summary>
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public long Id { get; set; }
 
         public override bool Equals(object obj)

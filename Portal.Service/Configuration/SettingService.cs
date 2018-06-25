@@ -9,7 +9,7 @@ using Nop.Core.Caching;
 using Portal.core;
 using Portal.core.Caching;
 using Portal.core.Configuration;
-using QtasMarketing.Core.Infrastructure;
+using Portal.core.Infrastructure;
 
 namespace Portal.Service.Configuration
 {

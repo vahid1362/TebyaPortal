@@ -2,10 +2,10 @@
 using ImageResizer;
 using Portal.core;
 using Portal.core.Media;
-using QtasMarketing.Core.Infrastructure;
 using  System.Drawing;
 using ImageSharp;
 using ImageSharp.Processing;
+using Portal.core.Infrastructure;
 
 namespace Portal.Service.Media
 {

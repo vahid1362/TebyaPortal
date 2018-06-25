@@ -5,12 +5,11 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Rest.Serialization;
+using Portal.core.Infrastructure;
 using Portal.Infrastructure;
 using Portal.Service;
 using Portal.Service.Media;
 using Portal.Service.News;
-using QtasMarketing.Core.Infrastructure;
-using QtasMarketing.Infrastructure;
 using QTasMarketing.Web.Areas.Admin.Extentions;
 
 namespace QTasMarketing.Web
