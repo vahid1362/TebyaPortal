@@ -35,13 +35,16 @@
                         @(Html.Kendo().Upload()
                                       .Name("files")
                                       .Async(a => a
-                                          .Save("Save", "Media", new { Model.AddContentPictureModel.PictureId })
+                                          .Save("Save", "Media")
                                           .Remove("Remove", "Media", new { Model.AddContentPictureModel.PictureId })
                                           .AutoUpload(true)
                                       )
                                       .Events(events => events
+                                      .Upload("onUpload")
                                       .Remove("onRemove")
-                                      .Success("onSuccess"))
+                                      .Success("onSuccess")
+                                      
+                                      )
                                       .Multiple(false)
                                       .Validation(validation =>
                                       {
@@ -94,7 +97,8 @@
                     };
 
                     reader.readAsDataURL(file);
-                    alert("@Html.IdFor(m=>m.AddContentPictureModel.PictureId)");
+                    alert(e.data.pictureId);
+                   
                  
                 }
             }
@@ -104,6 +108,13 @@
     function onRemove(e) {
 
         $("#images").children().remove();
+    }
+
+    function onUpload(e) {
+
+        e.data = {
+            pictureId: @Html.IdFor(m => m.AddContentPictureModel.PictureId)
+        };
     }
 
 

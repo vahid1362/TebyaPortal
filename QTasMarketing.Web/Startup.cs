@@ -1,11 +1,13 @@
 using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Rest.Serialization;
 using Portal.core.Infrastructure;
+using Portal.core.Membership;
 using Portal.Infrastructure;
 using Portal.Service;
 using Portal.Service.Media;
@@ -42,6 +44,7 @@ namespace QTasMarketing.Web
             services.AddTransient(typeof(IRepository<>), typeof(EFRepository<>));
             services.AddTransient<INewsService, NewsService>();
             services.AddTransient<IPictureService, PictureService>();
+            services.AddIdentity<AppUser, IdentityRole>();
 
 
 
@@ -58,11 +61,7 @@ namespace QTasMarketing.Web
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-            //using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
-            //{
-            //    var context = serviceScope.ServiceProvider.GetService<MarketingIdentityContext>();
-            //    DataSeeder.SeedCountries(context).Wait();
-            //}
+           
 
             if (env.IsDevelopment())
             {
