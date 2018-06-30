@@ -80,7 +80,7 @@ namespace QTasMarketing.Web.Areas.Admin.Controllers
             return Json(new
             {
                 success = true,
-                pictureId = pictureId,
+                AddContentPictureModel_PictureId = pictureId,
                // imageUrl = _pictureService.GetPictureUrl(picture, 100)
             });
         }

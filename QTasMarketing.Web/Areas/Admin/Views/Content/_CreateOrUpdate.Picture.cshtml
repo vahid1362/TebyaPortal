@@ -35,12 +35,12 @@
                         @(Html.Kendo().Upload()
                                       .Name("files")
                                       .Async(a => a
-                                          .Save("Save", "Media")
+                                          .Save("Save", "Media", new { Model.AddContentPictureModel.PictureId })
                                           .Remove("Remove", "Media", new { Model.AddContentPictureModel.PictureId })
                                           .AutoUpload(true)
                                       )
                                       .Events(events => events
-                                      .Upload("onUpload")
+                                   
                                       .Remove("onRemove")
                                       .Success("onSuccess")
                                       
@@ -84,38 +84,45 @@
 
 
 <script>
-    function onSuccess(e) {
-        if (e.operation == "upload") {
-            for (var i = 0; i < e.files.length; i++) {
-                var file = e.files[i].rawFile;
-               
-                if (file) {
-                    var reader = new FileReader();
 
-                    reader.onloadend = function () {
-                        $("<div ><img class='imageUpload' src=" + this.result + " /></div>").appendTo($("#images"));
-                    };
 
-                    reader.readAsDataURL(file);
-                    alert(e.data.pictureId);
-                   
-                 
-                }
-            }
+    $(function () {
+
+        $('#addContentPicture').click(function () {
+            /**/
+            var x = $("#AddContentPictureModel_PictureId").val();
+    /**/
+    alert(x);
+
+});
+
+});
+
+function onSuccess(e) {
+if (e.operation == "upload") {
+    for (var i = 0; i < e.files.length; i++) {
+        var file = e.files[i].rawFile;
+
+        if (file) {
+            var reader = new FileReader();
+
+            reader.onloadend = function () {
+                $("<div ><img class='imageUpload' src=" + this.result + " /></div>").appendTo($("#images"));
+            };
+
+            reader.readAsDataURL(file);
+
+
+
         }
     }
+}
+}
 
-    function onRemove(e) {
+function onRemove(e) {
 
-        $("#images").children().remove();
-    }
-
-    function onUpload(e) {
-
-        e.data = {
-            pictureId: @Html.IdFor(m => m.AddContentPictureModel.PictureId)
-        };
-    }
+$("#images").children().remove();
+}
 
 
 </script>
