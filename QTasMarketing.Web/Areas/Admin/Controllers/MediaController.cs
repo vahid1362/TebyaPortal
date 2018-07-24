@@ -3,6 +3,8 @@ using System.IO;
 using System.Linq;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 using Portal.core;
 using Portal.Service.Media;
 
@@ -80,8 +82,13 @@ namespace QTasMarketing.Web.Areas.Admin.Controllers
             return Json(new
             {
                 success = true,
-                AddContentPictureModel_PictureId = pictureId,
+                pictureId,
                // imageUrl = _pictureService.GetPictureUrl(picture, 100)
+            }, new JsonSerializerSettings()
+            {
+                Formatting = Formatting.Indented,
+                ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
+                Converters = { new StringEnumConverter() }
             });
         }
 

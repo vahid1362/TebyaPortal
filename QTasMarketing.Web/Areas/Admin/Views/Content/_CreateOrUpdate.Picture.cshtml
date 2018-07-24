@@ -26,17 +26,17 @@
                 </div>
                 <div class="form-group">
                     <div class="col-md-3">
-                        <label asp-for="AddContentPictureModel.PictureId"></label>
+                   <label asp-for="AddContentPictureModel.PictureId"></label>
                     </div>
                     <div class="col-md-4">
 
-                        @Html.HiddenFor(model => model.AddContentPictureModel.PictureId)
+                        @Html.Hidden("PictureId")
 
                         @(Html.Kendo().Upload()
                                       .Name("files")
                                       .Async(a => a
-                                          .Save("Save", "Media", new { Model.AddContentPictureModel.PictureId })
-                                          .Remove("Remove", "Media", new { Model.AddContentPictureModel.PictureId })
+                                          .Save("Save", "Media",new{pictureId=@Model.AddContentPictureModel.PictureId})
+                                          .Remove("Remove", "Media")
                                           .AutoUpload(true)
                                       )
                                       .Events(events => events
@@ -89,18 +89,23 @@
     $(function () {
 
         $('#addContentPicture').click(function () {
-            /**/
-            var x = $("#AddContentPictureModel_PictureId").val();
-    /**/
-    alert(x);
 
-});
+            var pictureId = $("@Html.IdFor(model=>model.AddContentPictureModel.PictureId)").val();
+            alert(pictureId);
+
+        });
 
 });
 
 function onSuccess(e) {
-if (e.operation == "upload") {
-    for (var i = 0; i < e.files.length; i++) {
+    if (e.operation == "upload") {
+
+        $("#PictureId").val(e.response.PictureId);
+        alert($("#PictureId").val());
+
+       
+        alert(e.response.pictureId);
+        for (var i = 0; i < e.files.length; i++) {
         var file = e.files[i].rawFile;
 
         if (file) {
