@@ -26,11 +26,11 @@
                 </div>
                 <div class="form-group">
                     <div class="col-md-3">
-                   <label asp-for="AddContentPictureModel.PictureId"></label>
+              
                     </div>
                     <div class="col-md-4">
 
-                        @Html.Hidden("PictureId")
+                        @Html.HiddenFor(model=>model.AddContentPictureModel.PictureId)
 
                         @(Html.Kendo().Upload()
                                       .Name("files")
@@ -90,8 +90,11 @@
 
         $('#addContentPicture').click(function () {
 
-            var pictureId = $("@Html.IdFor(model=>model.AddContentPictureModel.PictureId)").val();
+            var pictureId = $("#@Html.IdFor(model=>model.AddContentPictureModel.PictureId)").val();
+            debugger;
             alert(pictureId);
+
+
 
         });
 
@@ -100,11 +103,12 @@
 function onSuccess(e) {
     if (e.operation == "upload") {
 
-        $("#PictureId").val(e.response.PictureId);
-        alert($("#PictureId").val());
+      
+        $("#@Html.IdFor(model=>model.AddContentPictureModel.PictureId)").val(e.response.PictureId);
 
-       
-        alert(e.response.pictureId);
+        alert(e.response.PictureId);
+
+
         for (var i = 0; i < e.files.length; i++) {
         var file = e.files[i].rawFile;
 
