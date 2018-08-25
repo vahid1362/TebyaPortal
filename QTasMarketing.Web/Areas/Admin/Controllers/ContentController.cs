@@ -135,10 +135,7 @@ namespace QTasMarketing.Web.Areas.Admin.Controllers
             if (content == null)
                 RedirectToAction("List");
             content = _mapper.Map<Content>(model);
-
-
-
-
+            
             _newsService.EditContent(content);
             _toastNotification.AddSuccessToastMessage("عملیات  با موفقیت صورت پذیرفت");
 
@@ -193,6 +190,10 @@ namespace QTasMarketing.Web.Areas.Admin.Controllers
             return Json(new { success = true });
         }
 
+        public IActionResult AddContentPicture(long pictureId, int displayOrder, long contentId)
+        {
+            return null;
+        }
 
 
     }

@@ -26,31 +26,32 @@
                 </div>
                 <div class="form-group">
                     <div class="col-md-3">
-              
+
                     </div>
                     <div class="col-md-4">
 
-                        @Html.HiddenFor(model=>model.AddContentPictureModel.PictureId)
+                        @Html.HiddenFor(model => model.AddContentPictureModel.PictureId)
 
                         @(Html.Kendo().Upload()
-                                      .Name("files")
-                                      .Async(a => a
-                                          .Save("Save", "Media",new{pictureId=@Model.AddContentPictureModel.PictureId})
-                                          .Remove("Remove", "Media")
-                                          .AutoUpload(true)
-                                      )
-                                      .Events(events => events
-                                   
-                                      .Remove("onRemove")
-                                      .Success("onSuccess")
-                                      
-                                      )
-                                      .Multiple(false)
-                                      .Validation(validation =>
-                                      {
-                                          validation.AllowedExtensions(new string[] { ".jpg", ".jpeg", ".png", ".bmp", ".gif" });
-                                          validation.MinFileSize(500);
-                                      }))
+                                              .Name("files")
+                                              .Async(a => a
+                                                  .Save("Save", "Media", new { pictureId = @Model.AddContentPictureModel.PictureId })
+                                                  .Remove("Remove", "Media")
+                                                  .AutoUpload(true)
+                                              )
+                                              .Events(events => events
+
+                                              .Remove("onRemove")
+                                              .Success("onSuccess")
+                                                  
+
+                                              )
+                                              .Multiple(false)
+                                              .Validation(validation =>
+                                              {
+                                                  validation.AllowedExtensions(new string[] { ".jpg", ".jpeg", ".png", ".bmp", ".gif" });
+                                                  validation.MinFileSize(500);
+                                              }))
                     </div>
 
                 </div>
@@ -85,14 +86,42 @@
 
 <script>
 
-
+    var pictureId='';
     $(function () {
 
         $('#addContentPicture').click(function () {
 
-            var pictureId = $("#@Html.IdFor(model=>model.AddContentPictureModel.PictureId)").val();
-            debugger;
-            alert(pictureId);
+            $("#addContentPicture").attr('disabled', true);
+
+            var displayOrder = $("@Html.IdFor(model=>model.AddContentPictureModel.DisplayOrder)");
+            var postData = {
+                pictureId: pictureId,
+                displayOrder: displayOrder,
+                contentId: @Model.Id
+            };
+
+            alert(postData.contentId);
+            $.ajax({
+                
+                type: "POST",
+                url:"@Url.Action()",
+                data: postData,
+                success: function(data) {
+                    //var grid = $("#productpictures-grid");
+                    //grid.data('kendoGrid').dataSource.read();
+                    //$('#addProductPicture').attr('disabled', false);
+                    $("#addContentPicture").attr('disabled', false);
+                    alert("ok");
+                },
+                error: function(xhr, ajaxOptions, thrownError) {
+                    //alert('Failed to add product picture.');
+                    //$('#addProductPicture').attr('disabled', false);
+                    $("#addContentPicture").attr('disabled', false);
+                    alert("error");
+                }
+              
+            });
+         alert(pictureId);
 
 
 
@@ -103,10 +132,9 @@
 function onSuccess(e) {
     if (e.operation == "upload") {
 
-      
-        $("#@Html.IdFor(model=>model.AddContentPictureModel.PictureId)").val(e.response.PictureId);
+    
+        pictureId = e.response.pictureId;
 
-        alert(e.response.PictureId);
 
 
         for (var i = 0; i < e.files.length; i++) {
@@ -131,7 +159,9 @@ function onSuccess(e) {
 function onRemove(e) {
 
 $("#images").children().remove();
-}
+    }
+
+    
 
 
 </script>

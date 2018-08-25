@@ -11,7 +11,7 @@ using Portal.Service.Media;
 namespace QTasMarketing.Web.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    public class MediaController :Controller
+    public class MediaController : Controller
     {
 
         private readonly IPictureService _pictureService;
@@ -26,7 +26,7 @@ namespace QTasMarketing.Web.Areas.Admin.Controllers
             return View();
         }
 
-        public JsonResult Save(IEnumerable<IFormFile> files,long? pictureId)
+        public ActionResult Save(IEnumerable<IFormFile> files, long? pictureId)
         {
             // The Name of the Upload component is "files"
             if (files != null)
@@ -72,18 +72,22 @@ namespace QTasMarketing.Web.Areas.Admin.Controllers
                         }
                     }
                     var binaryFormatFile = file.GetDownloadBits();
-                  var picture=  _pictureService.InsertPicture(binaryFormatFile, contentType, null);
+                    var picture = _pictureService.InsertPicture(binaryFormatFile, contentType, null);
                     pictureId = picture.Id;
+
+                  
 
                 }
             }
 
-            // Return an empty string to signify success
+
+
+        
             return Json(new
             {
                 success = true,
                 pictureId,
-               // imageUrl = _pictureService.GetPictureUrl(picture, 100)
+                // imageUrl = _pictureService.GetPictureUrl(picture, 100)
             }, new JsonSerializerSettings()
             {
                 Formatting = Formatting.Indented,
