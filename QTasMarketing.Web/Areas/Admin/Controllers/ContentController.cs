@@ -189,8 +189,9 @@ namespace QTasMarketing.Web.Areas.Admin.Controllers
         {
             return Json(new { success = true });
         }
+        [HttpPost]
 
-        public IActionResult AddContentPicture(long pictureId, int displayOrder, long contentId)
+        public IActionResult AddContentPicture(ContentPictureModel contentPictureModel)
         {
             return null;
         }

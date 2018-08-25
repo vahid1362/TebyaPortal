@@ -95,33 +95,26 @@
 
             var displayOrder = $("@Html.IdFor(model=>model.AddContentPictureModel.DisplayOrder)");
             var postData = {
-                pictureId: pictureId,
+                PictureId: pictureId,
                 displayOrder: displayOrder,
-                contentId: @Model.Id
+                ContetnId: @Model.Id
             };
 
-            alert(postData.contentId);
+     
             $.ajax({
-                
                 type: "POST",
-                url:"@Url.Action()",
-                data: postData,
-                success: function(data) {
-                    //var grid = $("#productpictures-grid");
-                    //grid.data('kendoGrid').dataSource.read();
-                    //$('#addProductPicture').attr('disabled', false);
+                url:"@Url.Action("AddContentPicture", "Content")",
+                contentType: "application/json",
+                dataType: "json",
+                data: JSON.stringify(postData),  
+                success: function (response) {
                     $("#addContentPicture").attr('disabled', false);
                     alert("ok");
                 },
-                error: function(xhr, ajaxOptions, thrownError) {
-                    //alert('Failed to add product picture.');
-                    //$('#addProductPicture').attr('disabled', false);
-                    $("#addContentPicture").attr('disabled', false);
+                failure: function (response) {
                     alert("error");
                 }
-              
             });
-         alert(pictureId);
 
 
 
