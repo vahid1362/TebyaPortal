@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using QTasMarketing.Web.Areas.Admin.Models.Media;
 
 namespace QTasMarketing.Web.Areas.Admin.Models.Content
 {
@@ -10,8 +11,8 @@ namespace QTasMarketing.Web.Areas.Admin.Models.Content
         public ContentViewModel()
         {
             SelectListItems = new List<SelectListItem>();
-            ContentPictureModels = new List<ContentPictureModel>();
-            AddContentPictureModel = new ContentPictureModel();
+            ContentPictureModels = new List<ContentPictureViewModel>();
+            AddContentPictureModel = new ContentPictureViewModel();
         }
         [DisplayName("عنوان")]
         [Required(ErrorMessage = "این فیلد ضروری می باشد")]
@@ -41,28 +42,14 @@ namespace QTasMarketing.Web.Areas.Admin.Models.Content
 
         public List<SelectListItem> SelectListItems { get; set; }
 
-        public ContentPictureModel AddContentPictureModel { get; set; }
+        public ContentPictureViewModel AddContentPictureModel { get; set; }
 
-        public List<ContentPictureModel> ContentPictureModels { get; set; }
-
-
-    }
-
-
-    public class ContentPictureModel : EntityBaseViewModel
-    {
-        public int ContentId { get; set; }
-
-        public long PictureId { get; set; }
-
-        public string PictureUrl { get; set; }
-
-        [DisplayName("اولویت")]
-        public int DisplayOrder { get; set; }
-
-        public byte[] Image { get; set; }
+        public List<ContentPictureViewModel> ContentPictureModels { get; set; }
 
 
     }
+
+
+  
 }
 

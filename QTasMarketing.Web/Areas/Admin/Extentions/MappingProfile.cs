@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Portal.core.News;
 using QTasMarketing.Web.Areas.Admin.Models.Content;
+using QTasMarketing.Web.Areas.Admin.Models.Media;
 
 namespace QTasMarketing.Web.Areas.Admin.Extentions
 {
@@ -20,6 +21,10 @@ namespace QTasMarketing.Web.Areas.Admin.Extentions
 
             CreateMap<Content, ContentViewModel>();
             CreateMap<ContentViewModel, Content>();
+
+            CreateMap<ContentPicture, ContentPictureViewModel>();
+            CreateMap<ContentPictureViewModel, ContentPicture>();
+
 
 
             #endregion

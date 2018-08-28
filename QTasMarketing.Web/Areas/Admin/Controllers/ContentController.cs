@@ -10,12 +10,15 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Net.Http.Headers;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 using NToastNotify;
 using Portal.core.News;
 using Portal.Service.Media;
 using Portal.Service.News;
 using Portal.Web.Framework.Filters;
 using QTasMarketing.Web.Areas.Admin.Models.Content;
+using QTasMarketing.Web.Areas.Admin.Models.Media;
 
 namespace QTasMarketing.Web.Areas.Admin.Controllers
 {
@@ -55,8 +58,7 @@ namespace QTasMarketing.Web.Areas.Admin.Controllers
         {
             return View();
         }
-
-
+        
         public IActionResult Create()
         {
             var groups = PrepareGroupSelectedListItem();
@@ -65,8 +67,7 @@ namespace QTasMarketing.Web.Areas.Admin.Controllers
                 SelectListItems = groups
             });
         }
-
-
+        
         private List<SelectListItem> PrepareGroupSelectedListItem()
         {
             var groups = _newsService.GetGroups().Select(x => new SelectListItem()
@@ -107,17 +108,14 @@ namespace QTasMarketing.Web.Areas.Admin.Controllers
 
             return RedirectToAction("List");
         }
-
-
-
+        
         public IActionResult Edit(long? contentId)
         {
             if (contentId == null)
                 _toastNotification.AddErrorToastMessage("خطا در پار متر ورودی");
 
             var content = _newsService.GetContentById(contentId.GetValueOrDefault());
-
-            var contentViewModel = _mapper.Map<ContentViewModel>(content);
+                        var contentViewModel = _mapper.Map<ContentViewModel>(content);
             var groups = PrepareGroupSelectedListItem();
 
             contentViewModel.SelectListItems = groups;
@@ -142,7 +140,6 @@ namespace QTasMarketing.Web.Areas.Admin.Controllers
             return RedirectToAction("List");
         }
 
-
         public JsonResult Content_Read([DataSourceRequest] DataSourceRequest request)
         {
             var contents = _newsService.GetContents();
@@ -163,6 +160,7 @@ namespace QTasMarketing.Web.Areas.Admin.Controllers
 
         public ActionResult Save(IEnumerable<IFormFile> files, byte[] imageByteArray)
         {
+            if (imageByteArray == null) throw new ArgumentNullException(nameof(imageByteArray));
 
             foreach (var file in files)
             {
@@ -185,15 +183,35 @@ namespace QTasMarketing.Web.Areas.Admin.Controllers
             return Content("");
         }
 
-        public JsonResult SavePicture(ContentPictureModel model)
-        {
-            return Json(new { success = true });
-        }
         [HttpPost]
-
-        public IActionResult AddContentPicture(ContentPictureModel contentPictureModel)
+        public IActionResult AddContentPicture([FromBody]ContentPictureViewModel contentPictureViewModel)
         {
-            return null;
+           
+                var contePicture = _mapper.Map<ContentPicture>(contentPictureViewModel);
+                _newsService.AddContentPicture(contePicture);
+              return Json(new
+                {
+                    success = true,
+
+                 
+                }, new JsonSerializerSettings()
+                {
+                    Formatting = Formatting.Indented,
+                    ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
+                    Converters = { new StringEnumConverter() }
+                });
+            
+        }
+
+        public IActionResult ContentPicture_Read([DataSourceRequest] DataSourceRequest request, long? contentId)
+        {
+            if (contentId == null)
+                _toastNotification.AddErrorToastMessage("خطا در پار متر ورودی");
+
+            var contentPictures = _newsService.GetContentPictures(contentId.GetValueOrDefault());
+            var contentPictureViewModels =
+                _mapper.Map<List<ContentPicture>, List<ContentPictureViewModel>>(contentPictures);
+            return Json(contentPictureViewModels.ToDataSourceResult(request));
         }
 
 

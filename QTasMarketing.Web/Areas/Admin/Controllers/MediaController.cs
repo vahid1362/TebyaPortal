@@ -81,7 +81,6 @@ namespace QTasMarketing.Web.Areas.Admin.Controllers
             }
 
 
-
         
             return Json(new
             {

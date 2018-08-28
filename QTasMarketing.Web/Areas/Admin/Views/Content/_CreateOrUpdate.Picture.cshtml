@@ -1,4 +1,5 @@
 ﻿@using Kendo.Mvc.UI
+@using QTasMarketing.Web.Areas.Admin.Models.Media
 @model QTasMarketing.Web.Areas.Admin.Models.Content.ContentViewModel
 <link href="~/lib/fineuploader/fineuploader-4.2.2.css" rel="stylesheet" />
 <script src="~/lib/fineuploader/jquery.fineuploader-4.2.2.js"></script>
@@ -10,7 +11,16 @@
     {
         <div class="panel panel-default">
             <div class="panel-body">
-
+                @(Html.Kendo().Grid<ContentPictureViewModel>().Name("ContentGrid")
+                      .Columns(columns =>
+                      {
+                          columns.Bound(c => c.DisplayOrder);
+                          columns.Command(x => x.Destroy().Text("حذف"));
+                      })
+                      .DataSource(datasource=>datasource.Ajax().Read(read=>read.Action("ContentPicture_Read","Content",new {contentId=@Model.Id}))
+                          
+                    )
+                      )
             </div>
         </div>
 
@@ -31,6 +41,8 @@
                     <div class="col-md-4">
 
                         @Html.HiddenFor(model => model.AddContentPictureModel.PictureId)
+                        @Html.HiddenFor(model => model.Id)
+
 
                         @(Html.Kendo().Upload()
                                               .Name("files")
@@ -73,7 +85,7 @@
         </div>
     }
     else
-    {
+   {
         <div class=" panel panel-default">
             <div class="panel-body">
                 ابتدا محتوا را ذخیره کنید سپس تصویر به آن اضافه کنید
@@ -93,20 +105,22 @@
 
             $("#addContentPicture").attr('disabled', true);
 
-            var displayOrder = $("@Html.IdFor(model=>model.AddContentPictureModel.DisplayOrder)");
+            var displayOrder = $("#@Html.IdFor(model=>model.AddContentPictureModel.DisplayOrder)").val();
+            var contentId = $("#@Html.IdFor(model=>model.Id)").val();
+
             var postData = {
                 PictureId: pictureId,
-                displayOrder: displayOrder,
-                ContetnId: @Model.Id
+                DisplayOrder: displayOrder,
+                ContentId: contentId
             };
 
-     
+
             $.ajax({
                 type: "POST",
                 url:"@Url.Action("AddContentPicture", "Content")",
                 contentType: "application/json",
                 dataType: "json",
-                data: JSON.stringify(postData),  
+                data: JSON.stringify(postData),
                 success: function (response) {
                     $("#addContentPicture").attr('disabled', false);
                     alert("ok");
@@ -125,7 +139,7 @@
 function onSuccess(e) {
     if (e.operation == "upload") {
 
-    
+
         pictureId = e.response.pictureId;
 
 
@@ -154,7 +168,7 @@ function onRemove(e) {
 $("#images").children().remove();
     }
 
-    
+
 
 
 </script>
