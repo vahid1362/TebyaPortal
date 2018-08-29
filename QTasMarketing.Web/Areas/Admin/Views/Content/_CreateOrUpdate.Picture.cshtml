@@ -15,10 +15,18 @@
                       .Columns(columns =>
                       {
                           columns.Bound(c => c.DisplayOrder);
-                          columns.Command(x => x.Destroy().Text("حذف"));
+                        columns.Template("<a class=\"btn btn-success btn-sm\" href='Show/?CaseId=#: Id #'><i class='fa fa-eye'></i></a>" + Environment.NewLine +
+                                         "<a class=\"btn btn-warning btn-sm\" href='CreateOrUpdate/?CaseId=#: Id #'><i class='fa fa-edit'></i></a>" + Environment.NewLine +
+                                         "<a class=\"btn btn-danger btn-sm\" onclick='ConfirmDelete(\"#: Id #\"); return false;'><i class='fa fa-trash'></i></a>")
+                            
+                              .Title("عملیات")
+                              .HtmlAttributes(new { @class = "text-center" })
+                              .Width("10%");
                       })
-                      .DataSource(datasource=>datasource.Ajax().Read(read=>read.Action("ContentPicture_Read","Content",new {contentId=@Model.Id}))
-                          
+                      .DataSource(datasource=>datasource.Ajax()
+                          .Model(model=>model.Id(p=>p.Id))
+                      .Read(read=>read.Action("ContentPicture_Read","Content",new {contentId=@Model.Id}))
+                          .Update(update=>update.Action("Delete_ContentPicture","Content", new { contentId = @Model.Id }))
                     )
                       )
             </div>

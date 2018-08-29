@@ -215,5 +215,9 @@ namespace QTasMarketing.Web.Areas.Admin.Controllers
         }
 
 
+        public IActionResult Delete_ContentPicture()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

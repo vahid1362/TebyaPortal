@@ -10,6 +10,8 @@ namespace QTasMarketing.Web.Areas.Admin.Models.Media
 
         public long PictureId { get; set; }
 
+
+        [DisplayName("آدرس تصاویر")]
         public string PictureUrl { get; set; }
 
         [DisplayName("اولویت")]
