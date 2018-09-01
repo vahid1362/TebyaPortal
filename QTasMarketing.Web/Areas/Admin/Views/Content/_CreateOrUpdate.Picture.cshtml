@@ -11,25 +11,30 @@
     {
         <div class="panel panel-default">
             <div class="panel-body">
+            
+
+               
                 @(Html.Kendo().Grid<ContentPictureViewModel>().Name("ContentGrid")
                       .Columns(columns =>
                       {
                           columns.Bound(c => c.DisplayOrder);
-                        columns.Template("<a class=\"btn btn-success btn-sm\" href='Show/?CaseId=#: Id #'><i class='fa fa-eye'></i></a>" + Environment.NewLine +
-                                         "<a class=\"btn btn-warning btn-sm\" href='CreateOrUpdate/?CaseId=#: Id #'><i class='fa fa-edit'></i></a>" + Environment.NewLine +
-                                         "<a class=\"btn btn-danger btn-sm\" onclick='ConfirmDelete(\"#: Id #\"); return false;'><i class='fa fa-trash'></i></a>")
-                            
+                          columns.Bound(c => c.PictureUrl).Width(400).ClientTemplate("<a href='#= PictureUrl #' target='_blank'><img alt='#= PictureId #' src='#= PictureUrl #' class='img-polaroid' style='max-height: 100px' /><a/>");
+                          columns.Template("<a class=\"btn btn-success btn-sm\" href='Show/?CaseId=#: Id #'><i class='fa fa-eye'></i></a>" + Environment.NewLine +
+                                           "<a class=\"btn btn-warning btn-sm\" href='CreateOrUpdate/?CaseId=#: Id #'><i class='fa fa-edit'></i></a>" + Environment.NewLine +
+                                           "<a class=\"btn btn-danger btn-sm\" onclick='ConfirmDelete(\"#: Id #\"); return false;'><i class='fa fa-trash'></i></a>")
+
                               .Title("عملیات")
-                              .HtmlAttributes(new { @class = "text-center" })
+                              .HtmlAttributes(new {@class = "text-center"})
                               .Width("10%");
                       })
-                      .DataSource(datasource=>datasource.Ajax()
-                          .Model(model=>model.Id(p=>p.Id))
-                      .Read(read=>read.Action("ContentPicture_Read","Content",new {contentId=@Model.Id}))
-                          .Update(update=>update.Action("Delete_ContentPicture","Content", new { contentId = @Model.Id }))
-                    )
+                      .DataSource(datasource => datasource.Ajax()
+                          .Model(model => model.Id(p => p.Id))
+                          .Read(read => read.Action("ContentPicture_Read", "Content", new {contentId = @Model.Id}))
+                          .Update(update => update.Action("Delete_ContentPicture", "Content", new {contentId = @Model.Id}))
                       )
-            </div>
+                      )
+                </div>
+        
         </div>
 
         <div class="panel panel-default">
