@@ -6,7 +6,7 @@ namespace QTasMarketing.Web.Areas.Admin.Models.Media
   public   class ContentPictureViewModel:EntityBaseViewModel
     {
 
-        public int ContentId { get; set; }
+        public long ContentId { get; set; }
 
         public long PictureId { get; set; }
 

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Linq.Expressions;
 using AutoMapper;
 using Kendo.Mvc.Extensions;
 using Kendo.Mvc.UI;
@@ -209,8 +210,23 @@ namespace QTasMarketing.Web.Areas.Admin.Controllers
                 _toastNotification.AddErrorToastMessage("خطا در پار متر ورودی");
 
             var contentPictures = _newsService.GetContentPictures(contentId.GetValueOrDefault());
-            var contentPictureViewModels =
-                _mapper.Map<List<ContentPicture>, List<ContentPictureViewModel>>(contentPictures);
+            var contentPictureViewModels = contentPictures.Select(x =>
+                {
+                    var picture = _pictureService.GetPictureById(x.PictureId);
+                    if (picture == null)
+                        throw new Exception("تصاویر نمی توانند بارگذاری  شوند");
+                    var m = new ContentPictureViewModel
+                    {
+                        Id = x.Id,
+                        ContentId = x.ContentId,
+                        PictureUrl = _pictureService.GetPictureUrl(picture),
+                        DisplayOrder = x.DisplayOrder,
+                        PictureId = x.PictureId
+
+
+                    };
+                    return m;}).ToList();
+             
             return Json(contentPictureViewModels.ToDataSourceResult(request));
         }
 

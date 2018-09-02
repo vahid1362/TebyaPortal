@@ -1,6 +1,8 @@
 using AutoMapper;
+using ImageResizer.Configuration.Logging;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Hosting.Internal;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -44,6 +46,8 @@ namespace QTasMarketing.Web
             services.AddTransient(typeof(IRepository<>), typeof(EFRepository<>));
             services.AddTransient<INewsService, NewsService>();
             services.AddTransient<IPictureService, PictureService>();
+            services.AddTransient<IHostingEnvironment, HostingEnvironment>();
+        
             services.AddIdentity<AppUser, IdentityRole>();
 
 

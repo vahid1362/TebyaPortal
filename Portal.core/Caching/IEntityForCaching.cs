@@ -1,4 +1,4 @@
-namespace Nop.Core.Caching
+namespace Portal.core.Caching
 {
     /// <summary>
     /// Cacheable entity (EF doesn't support 2-level caching now)

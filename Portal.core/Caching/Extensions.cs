@@ -2,9 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
-using Portal.core.Caching;
 
-namespace Nop.Core.Caching
+namespace Portal.core.Caching
 {
     /// <summary>
     /// Extensions of ICacheManager

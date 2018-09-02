@@ -17,7 +17,7 @@
                 @(Html.Kendo().Grid<ContentPictureViewModel>().Name("ContentGrid")
                       .Columns(columns =>
                       {
-                          columns.Bound(c => c.DisplayOrder);
+                          columns.Bound(c => c.DisplayOrder).Width("10%");
                           columns.Bound(c => c.PictureUrl).Width(400).ClientTemplate("<a href='#= PictureUrl #' target='_blank'><img alt='#= PictureId #' src='#= PictureUrl #' class='img-polaroid' style='max-height: 100px' /><a/>");
                           columns.Template("<a class=\"btn btn-success btn-sm\" href='Show/?CaseId=#: Id #'><i class='fa fa-eye'></i></a>" + Environment.NewLine +
                                            "<a class=\"btn btn-warning btn-sm\" href='CreateOrUpdate/?CaseId=#: Id #'><i class='fa fa-edit'></i></a>" + Environment.NewLine +
