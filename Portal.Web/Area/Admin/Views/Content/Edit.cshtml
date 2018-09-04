@@ -1,0 +1,61 @@
+﻿@model QTasMarketing.Web.Areas.Admin.Models.Content.ContentViewModel
+@{
+    ViewData["Title"] = "ویرایش";
+    Layout = "~/Views/Shared/_AdminLayOut.cshtml";
+}
+
+@using (Html.BeginForm(null, null, FormMethod.Post, new {@class = "form-horizontal"}))
+{
+    <section class="content-header">
+        <div class="row">
+            <div class="col-md-12">
+                <ol class="breadcrumb">
+                    <li><a href="@Url.Action("List")"><i class="fa fa-dashboard "></i> ویرایش محتوا</a></li>
+                    <li class="active">@ViewBag.Title</li>
+                </ol>
+            </div>
+        </div>
+    </section>
+    <section class="content">
+        <div class="box box-info">
+            <div class="box-header with-border">
+                <div class="row">
+                    <div class="text-left">
+                        <button type="submit" class="btn btn-success"><i class="fa fa-save fa-lg"></i>ذخیره</button>
+
+                        <a href="@Url.Action("List")" class="btn btn-default"><i class="fa fa-backward fa-lg"></i>بازگشت</a>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <!-- Custom Tabs (Pulled to the right) -->
+                    <div class="nav-tabs-custom">
+                        <ul class="nav nav-tabs pull-right">
+                            <li class="active"><a href="#tab_1-1" data-toggle="tab">محتوا</a></li>
+                            <li><a href="#tab_2-2" data-toggle="tab">تصاویر</a></li>
+                             
+                        </ul>
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="tab_1-1">
+                                @Html.Partial("_CreateOrUpdate",Model)
+                            </div>
+                            <!-- /.tab-pane -->
+                            <div class="tab-pane" id="tab_2-2">
+                                @Html.Partial("_CreateOrUpdate.Picture",Model)
+                            </div>
+                            <!-- /.tab-pane -->
+                                
+                            <!-- /.tab-pane -->
+                        </div>
+                        <!-- /.tab-content -->
+                    </div>
+                    <!-- nav-tabs-custom -->
+                </div>
+                
+            </div>
+        </div>
+
+    </section>
+}
+
