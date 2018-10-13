@@ -1,15 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
 using System.IO;
 using Portal.core;
 using Portal.core.Media;
 using System.Linq;
 using System.Threading;
-using ImageResizer;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Logging;
+using Portal.core.Data;
+using Portal.core.Events;
 using Portal.core.Infrastructure;
+using Portal.Service.Configuration;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.Formats;
 using SixLabors.ImageSharp.Formats.Bmp;
@@ -29,8 +27,14 @@ namespace Portal.Service.Media
 
         #region Feild
 
+        private readonly IDataProvider _dataProvider;
+        private readonly IEventPublisher _eventPublisher;
+        private readonly IPortalFileProvider _fileProvider;
         private readonly IRepository<Picture> _pictureRepository;
+        private readonly ISettingService _settingService;
+        private readonly IWebHelper _webHelper;
         private readonly MediaSettings _mediaSettings;
+        private readonly IRepository<PictureBinary> _pictureBinaryRepository;
 
         #endregion
         #region Const
@@ -44,9 +48,10 @@ namespace Portal.Service.Media
 
         #region Ctor
 
-        public PictureService(IRepository<Picture> pictureRepository)
+        public PictureService(IRepository<Picture> pictureRepository, IRepository<PictureBinary> pictureBinaryRepository)
         {
             _pictureRepository = pictureRepository;
+            _pictureBinaryRepository = pictureBinaryRepository;
         }
 
 
@@ -162,18 +167,10 @@ namespace Portal.Service.Media
         /// <returns>Picture binary</returns>
         public virtual byte[] LoadPictureBinary(Picture picture)
         {
-            return LoadPictureBinary(picture, StoreInDb);
+            return null;
         }
 
-        /// <summary>
-        /// Get picture SEO friendly name
-        /// </summary>
-        /// <param name="name">Name</param>
-        /// <returns>Result</returns>
-        public virtual string GetPictureSeName(string name)
-        {
-            return _urlRecordService.GetSeName(name, true, false);
-        }
+
 
         /// <summary>
         /// Gets the default picture URL
@@ -190,11 +187,11 @@ namespace Portal.Service.Media
             switch (defaultPictureType)
             {
                 case PictureType.Avatar:
-                    defaultImageFileName = _settingService.GetSettingByKey("Media.Customer.DefaultAvatarImageName", NopMediaDefaults.DefaultAvatarFileName);
+                    defaultImageFileName = _settingService.GetSettingByKey("Media.Customer.DefaultAvatarImageName", PortalMediaDefaults.DefaultAvatarFileName);
                     break;
                 case PictureType.Entity:
                 default:
-                    defaultImageFileName = _settingService.GetSettingByKey("Media.DefaultImageName", NopMediaDefaults.DefaultImageFileName);
+                    defaultImageFileName = _settingService.GetSettingByKey("Media.DefaultImageName", PortalMediaDefaults.DefaultImageFileName);
                     break;
             }
 
@@ -362,6 +359,56 @@ namespace Portal.Service.Media
         }
 
         /// <summary>
+        /// Updates the picture
+        /// </summary>
+        /// <param name="pictureId">The picture identifier</param>
+        /// <param name="pictureBinary">The picture binary</param>
+        /// <param name="mimeType">The picture MIME type</param>
+        /// <param name="seoFilename">The SEO filename</param>
+        /// <param name="altAttribute">"alt" attribute for "img" HTML element</param>
+        /// <param name="titleAttribute">"title" attribute for "img" HTML element</param>
+        /// <param name="isNew">A value indicating whether the picture is new</param>
+        /// <param name="validateBinary">A value indicating whether to validated provided picture binary</param>
+        /// <returns>Picture</returns>
+        public virtual Picture UpdatePicture(int pictureId, byte[] pictureBinary, string mimeType,
+            string seoFilename, string altAttribute = null, string titleAttribute = null,
+            bool isNew = true, bool validateBinary = true)
+        {
+            mimeType = CommonHelper.EnsureNotNull(mimeType);
+            mimeType = CommonHelper.EnsureMaximumLength(mimeType, 20);
+
+            seoFilename = CommonHelper.EnsureMaximumLength(seoFilename, 100);
+
+            if (validateBinary)
+                pictureBinary = ValidatePicture(pictureBinary, mimeType);
+
+            var picture = GetPictureById(pictureId);
+            if (picture == null)
+                return null;
+
+            //delete old thumbs if a picture has been changed
+            if (seoFilename != picture.SeoFilename)
+                DeletePictureThumbs(picture);
+
+            picture.MimeType = mimeType;
+            picture.SeoFilename = seoFilename;
+            picture.AltAttribute = altAttribute;
+            picture.TitleAttribute = titleAttribute;
+            picture.IsNew = isNew;
+
+            _pictureRepository.Update(picture);
+            UpdatePictureBinary(picture, StoreInDb ? pictureBinary : new byte[0]);
+
+            if (!StoreInDb)
+                SavePictureInFile(picture.Id, pictureBinary, mimeType);
+
+            //event notification
+            _eventPublisher.EntityUpdated(picture);
+
+            return picture;
+        }
+
+        /// <summary>
         /// Get a picture local path
         /// </summary>
         /// <param name="picture">Picture instance</param>
@@ -515,7 +562,7 @@ namespace Portal.Service.Media
         protected virtual void DeletePictureThumbs(Picture picture)
         {
             var filter = $"{picture.Id:0000000}*.*";
-            var currentFiles = _fileProvider.GetFiles(_fileProvider.GetAbsolutePath(NopMediaDefaults.ImageThumbsPath), filter, false);
+            var currentFiles = _fileProvider.GetFiles(_fileProvider.GetAbsolutePath(PortalMediaDefaults.ImageThumbsPath), filter, false);
             foreach (var currentFileName in currentFiles)
             {
                 var thumbFilePath = GetThumbLocalPath(currentFileName);
@@ -530,16 +577,16 @@ namespace Portal.Service.Media
         /// <returns>Local picture thumb path</returns>
         protected virtual string GetThumbLocalPath(string thumbFileName)
         {
-            var thumbsDirectoryPath = _fileProvider.GetAbsolutePath(NopMediaDefaults.ImageThumbsPath);
+            var thumbsDirectoryPath = _fileProvider.GetAbsolutePath(PortalMediaDefaults.ImageThumbsPath);
 
             if (_mediaSettings.MultipleThumbDirectories)
             {
                 //get the first two letters of the file name
                 var fileNameWithoutExtension = _fileProvider.GetFileNameWithoutExtension(thumbFileName);
-                if (fileNameWithoutExtension != null && fileNameWithoutExtension.Length > NopMediaDefaults.MultipleThumbDirectoriesLength)
+                if (fileNameWithoutExtension != null && fileNameWithoutExtension.Length > PortalMediaDefaults.MultipleThumbDirectoriesLength)
                 {
-                    var subDirectoryName = fileNameWithoutExtension.Substring(0, NopMediaDefaults.MultipleThumbDirectoriesLength);
-                    thumbsDirectoryPath = _fileProvider.GetAbsolutePath(NopMediaDefaults.ImageThumbsPath, subDirectoryName);
+                    var subDirectoryName = fileNameWithoutExtension.Substring(0, PortalMediaDefaults.MultipleThumbDirectoriesLength);
+                    thumbsDirectoryPath = _fileProvider.GetAbsolutePath(PortalMediaDefaults.ImageThumbsPath, subDirectoryName);
                     _fileProvider.CreateDirectory(thumbsDirectoryPath);
                 }
             }
@@ -565,9 +612,9 @@ namespace Portal.Service.Media
             {
                 //get the first two letters of the file name
                 var fileNameWithoutExtension = _fileProvider.GetFileNameWithoutExtension(thumbFileName);
-                if (fileNameWithoutExtension != null && fileNameWithoutExtension.Length > NopMediaDefaults.MultipleThumbDirectoriesLength)
+                if (fileNameWithoutExtension != null && fileNameWithoutExtension.Length > PortalMediaDefaults.MultipleThumbDirectoriesLength)
                 {
-                    var subDirectoryName = fileNameWithoutExtension.Substring(0, NopMediaDefaults.MultipleThumbDirectoriesLength);
+                    var subDirectoryName = fileNameWithoutExtension.Substring(0, PortalMediaDefaults.MultipleThumbDirectoriesLength);
                     url = url + subDirectoryName + "/";
                 }
             }
@@ -586,23 +633,7 @@ namespace Portal.Service.Media
             return _fileProvider.GetAbsolutePath("images", fileName);
         }
 
-        /// <summary>
-        /// Gets the loaded picture binary depending on picture storage settings
-        /// </summary>
-        /// <param name="picture">Picture</param>
-        /// <param name="fromDb">Load from database; otherwise, from file system</param>
-        /// <returns>Picture binary</returns>
-        protected virtual byte[] LoadPictureBinary(Picture picture, bool fromDb)
-        {
-            if (picture == null)
-                throw new ArgumentNullException(nameof(picture));
-
-            var result = fromDb
-                ? picture.PictureBinary?.BinaryData ?? new byte[0]
-                : LoadPictureFromFile(picture.Id, picture.MimeType);
-
-            return result;
-        }
+ 
 
         /// <summary>
         /// Get a value indicating whether some file (thumb) already exists
@@ -625,7 +656,7 @@ namespace Portal.Service.Media
         protected virtual void SaveThumb(string thumbFilePath, string thumbFileName, string mimeType, byte[] binary)
         {
             //ensure \thumb directory exists
-            var thumbsDirectoryPath = _fileProvider.GetAbsolutePath(NopMediaDefaults.ImageThumbsPath);
+            var thumbsDirectoryPath = _fileProvider.GetAbsolutePath(PortalMediaDefaults.ImageThumbsPath);
             _fileProvider.CreateDirectory(thumbsDirectoryPath);
 
             //save
@@ -634,9 +665,7 @@ namespace Portal.Service.Media
 
 
 
-        /// <summary>
-        /// Updates the picture binary data
-        /// </summary>
+        /// <summary> Updates the picture binary data </summary>
         /// <param name="picture">The picture object</param>
         /// <param name="binaryData">The picture binary data</param>
         /// <returns>Picture binary</returns>
