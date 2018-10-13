@@ -23,8 +23,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Portal.core", "Portal.core\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QTasMarketing.Web", "QTasMarketing.Web\QTasMarketing.Web.csproj", "{417E02E6-C55B-4150-91BC-589617B870F0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Portal.Web", "Portal.Web\Portal.Web.csproj", "{6E562482-5BFA-4CA4-85DA-CB344DE40B40}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -59,10 +57,6 @@ Global
 		{417E02E6-C55B-4150-91BC-589617B870F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{417E02E6-C55B-4150-91BC-589617B870F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{417E02E6-C55B-4150-91BC-589617B870F0}.Release|Any CPU.Build.0 = Release|Any CPU
-		{6E562482-5BFA-4CA4-85DA-CB344DE40B40}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6E562482-5BFA-4CA4-85DA-CB344DE40B40}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6E562482-5BFA-4CA4-85DA-CB344DE40B40}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6E562482-5BFA-4CA4-85DA-CB344DE40B40}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -75,7 +69,6 @@ Global
 		{6327F3EB-826C-4938-BC1E-F2E43F9E8985} = {B45DF7A0-4FA0-429D-B2B2-0B252CE0D114}
 		{7F7B7D06-61AE-45C7-AEE4-674FEB51DFCE} = {5989FCC9-B91A-40C3-8A04-813A54506A1F}
 		{417E02E6-C55B-4150-91BC-589617B870F0} = {53514424-2B4A-44A2-A22A-704575EF87B7}
-		{6E562482-5BFA-4CA4-85DA-CB344DE40B40} = {53514424-2B4A-44A2-A22A-704575EF87B7}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {55EC79B2-BA10-40B3-B0E5-8CAB2162724E}

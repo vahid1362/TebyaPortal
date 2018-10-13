@@ -7,45 +7,84 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="7.0.1" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="5.0.1" />
     <PackageReference Include="bootstrap" Version="3.3.7" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.0.1916590" />
+    <PackageReference Include="Select2.js" Version="4.0.5" />
+    <PackageReference Include="Telerik.UI.for.AspNet.Core" Version="2018.2.516" />
+    <PackageReference Include="toastr" Version="2.1.1" />
   </ItemGroup>
 
   <ItemGroup>
-    <Content Update="Area\Admin\Views\Content\Create.cshtml">
+    <Content Update="Areas\Admin\Views\Content\Create.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
-    <Content Update="Area\Admin\Views\Content\Edit.cshtml">
+    <Content Update="Areas\Admin\Views\Content\Edit.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
-    <Content Update="Area\Admin\Views\Content\List.cshtml">
+    <Content Update="Areas\Admin\Views\Content\List.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
-    <Content Update="Area\Admin\Views\Content\_CreateOrUpdate.cshtml">
+    <Content Update="Areas\Admin\Views\Content\_CreateOrUpdate.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
-    <Content Update="Area\Admin\Views\Content\_CreateOrUpdate.Picture.cshtml">
+    <Content Update="Areas\Admin\Views\Content\_CreateOrUpdate.Picture.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
-    <Content Update="Area\Admin\Views\Group\Create.cshtml">
+    <Content Update="Areas\Admin\Views\Group\Create.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
-    <Content Update="Area\Admin\Views\Group\Edit.cshtml">
+    <Content Update="Areas\Admin\Views\Group\Edit.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
-    <Content Update="Area\Admin\Views\Group\List.cshtml">
+    <Content Update="Areas\Admin\Views\Group\List.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
-    <Content Update="Area\Admin\Views\Group\_CreateOrUpdate.cshtml">
+    <Content Update="Areas\Admin\Views\Group\_CreateOrUpdate.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
-    <Content Update="Area\Admin\Views\Home\Index.cshtml">
+    <Content Update="Areas\Admin\Views\Home\Index.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
-    <Content Update="Area\Admin\Views\Shared\EditorTemplates\Picture.cshtml">
+    <Content Update="Areas\Admin\Views\Shared\EditorTemplates\Picture.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
+    <Content Update="Views\Account\Login.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\Home\Index.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\Shared\_AdminLayOut.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\_ViewImports.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\_ViewStart.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Views\Shared\EditorTemplate\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Portal.Infrastructure\Portal.Infrastructure.csproj" />
+    <ProjectReference Include="..\Portal.Service\Portal.Service.csproj" />
+    <ProjectReference Include="..\Portal.Web.Framework\Portal.Web.Framework.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Microsoft.Rest.ClientRuntime">
+      <HintPath>..\..\..\..\..\..\Program Files\dotnet\sdk\NuGetFallbackFolder\microsoft.rest.clientruntime\2.3.8\lib\netstandard1.4\Microsoft.Rest.ClientRuntime.dll</HintPath>
+    </Reference>
+    <Reference Include="NToastNotify">
+      <HintPath>..\..\..\..\.nuget\packages\ntoastnotify\5.0.8\lib\netstandard2.0\NToastNotify.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
 </Project>

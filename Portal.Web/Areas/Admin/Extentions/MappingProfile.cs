@@ -3,7 +3,7 @@ using Portal.core.News;
 using QTasMarketing.Web.Areas.Admin.Models.Content;
 using QTasMarketing.Web.Areas.Admin.Models.Media;
 
-namespace QTasMarketing.Web.Areas.Admin.Extentions
+namespace Portal.Web.Areas.Admin.Extentions
 {
     public class MappingProfile:Profile
     {

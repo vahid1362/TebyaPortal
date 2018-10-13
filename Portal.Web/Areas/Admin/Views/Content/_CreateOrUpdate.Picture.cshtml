@@ -11,9 +11,9 @@
     {
         <div class="panel panel-default">
             <div class="panel-body">
-            
 
-               
+
+
                 @(Html.Kendo().Grid<ContentPictureViewModel>().Name("ContentGrid")
                       .Columns(columns =>
                       {
@@ -31,9 +31,8 @@
                           .Model(model => model.Id(p => p.Id))
                           .Read(read => read.Action("ContentPicture_Read", "Content", new {contentId = @Model.Id}))
                           .Update(update => update.Action("Delete_ContentPicture", "Content", new {contentId = @Model.Id}))
-                      )
-                      )
-                </div>
+                      ))
+            </div>
         
         </div>
 
@@ -130,7 +129,7 @@
 
             $.ajax({
                 type: "POST",
-                url:"@Url.Action("AddContentPicture", "Content")",
+                url: "@Url.Action("AddContentPicture", "Content")",
                 contentType: "application/json",
                 dataType: "json",
                 data: JSON.stringify(postData),

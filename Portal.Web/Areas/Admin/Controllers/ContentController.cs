@@ -2,15 +2,12 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Linq.Expressions;
 using AutoMapper;
 using Kendo.Mvc.Extensions;
 using Kendo.Mvc.UI;
-using Microsoft.AspNetCore.Hosting.Internal;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.Net.Http.Headers;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using NToastNotify;
@@ -21,7 +18,7 @@ using Portal.Web.Framework.Filters;
 using QTasMarketing.Web.Areas.Admin.Models.Content;
 using QTasMarketing.Web.Areas.Admin.Models.Media;
 
-namespace QTasMarketing.Web.Areas.Admin.Controllers
+namespace Portal.Web.Area.Admin.Controllers
 {
     [Area("Admin")]
     public class ContentController : Controller
