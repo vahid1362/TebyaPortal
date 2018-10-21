@@ -14,6 +14,7 @@ using Portal.Infrastructure;
 using Portal.Service;
 using Portal.Service.Media;
 using Portal.Service.News;
+using Portal.Standard.Infrastructure;
 using QTasMarketing.Web.Areas.Admin.Extentions;
 
 namespace QTasMarketing.Web
@@ -38,10 +39,10 @@ namespace QTasMarketing.Web
             {
                 c.UseSqlServer(Configuration.GetConnectionString("MarketingContext"));
             });
-            services.AddDbContext<PortaIIdentityContext>(c =>
-            {
-                c.UseSqlServer(Configuration.GetConnectionString("IdentityContext"));
-            });
+            //services.AddDbContext<PortaIIdentityContext>(c =>
+            //{
+            //    c.UseSqlServer(Configuration.GetConnectionString("IdentityContext"));
+            //});
 
             var mapper = CreateMapperConfiguration();
             services.AddSingleton(mapper);
@@ -49,10 +50,10 @@ namespace QTasMarketing.Web
             services.AddKendo();
             services.AddTransient(typeof(IRepository<>), typeof(EFRepository<>));
             services.AddTransient<INewsService, NewsService>();
-            services.AddTransient<IPictureService, PictureService>();
+            //services.AddTransient<IPictureService, PictureService>();
             services.AddTransient<IHostingEnvironment, HostingEnvironment>();
         
-            services.AddIdentity<AppUser, IdentityRole>();
+         //   services.AddIdentity<AppUser, IdentityRole>();
 
 
 

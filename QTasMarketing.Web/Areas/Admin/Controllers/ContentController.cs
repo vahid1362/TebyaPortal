@@ -17,6 +17,7 @@ using NToastNotify;
 using Portal.core.News;
 using Portal.Service.Media;
 using Portal.Service.News;
+using Portal.Standard.Core.News;
 using Portal.Web.Framework.Filters;
 using QTasMarketing.Web.Areas.Admin.Models.Content;
 using QTasMarketing.Web.Areas.Admin.Models.Media;

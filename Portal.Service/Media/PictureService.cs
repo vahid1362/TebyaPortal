@@ -285,15 +285,15 @@ namespace Portal.Service.Media
             {
                 DeletePictureThumbs(picture);
 
-                //we do not validate picture binary here to ensure that no exception ("Parameter is not valid") will be thrown
-                picture = UpdatePicture(picture.Id,
-                    pictureBinary,
-                    picture.MimeType,
-                    picture.SeoFilename,
-                    picture.AltAttribute,
-                    picture.TitleAttribute,
-                    false,
-                    false);
+                ////we do not validate picture binary here to ensure that no exception ("Parameter is not valid") will be thrown
+                //picture = UpdatePicture(picture.Id,
+                //    pictureBinary,
+                //    picture.MimeType,
+                //    picture.SeoFilename,
+                //    picture.AltAttribute,
+                //    picture.TitleAttribute,
+                //    false,
+                //    false);
             }
 
             var seoFileName = picture.SeoFilename; // = GetPictureSeName(picture.SeoFilename); //just for sure
@@ -357,72 +357,9 @@ namespace Portal.Service.Media
             url = GetThumbUrl(thumbFileName, storeLocation);
             return url;
         }
+        
 
-        /// <summary>
-        /// Updates the picture
-        /// </summary>
-        /// <param name="pictureId">The picture identifier</param>
-        /// <param name="pictureBinary">The picture binary</param>
-        /// <param name="mimeType">The picture MIME type</param>
-        /// <param name="seoFilename">The SEO filename</param>
-        /// <param name="altAttribute">"alt" attribute for "img" HTML element</param>
-        /// <param name="titleAttribute">"title" attribute for "img" HTML element</param>
-        /// <param name="isNew">A value indicating whether the picture is new</param>
-        /// <param name="validateBinary">A value indicating whether to validated provided picture binary</param>
-        /// <returns>Picture</returns>
-        public virtual Picture UpdatePicture(int pictureId, byte[] pictureBinary, string mimeType,
-            string seoFilename, string altAttribute = null, string titleAttribute = null,
-            bool isNew = true, bool validateBinary = true)
-        {
-            mimeType = CommonHelper.EnsureNotNull(mimeType);
-            mimeType = CommonHelper.EnsureMaximumLength(mimeType, 20);
 
-            seoFilename = CommonHelper.EnsureMaximumLength(seoFilename, 100);
-
-            if (validateBinary)
-                pictureBinary = ValidatePicture(pictureBinary, mimeType);
-
-            var picture = GetPictureById(pictureId);
-            if (picture == null)
-                return null;
-
-            //delete old thumbs if a picture has been changed
-            if (seoFilename != picture.SeoFilename)
-                DeletePictureThumbs(picture);
-
-            picture.MimeType = mimeType;
-            picture.SeoFilename = seoFilename;
-            picture.AltAttribute = altAttribute;
-            picture.TitleAttribute = titleAttribute;
-            picture.IsNew = isNew;
-
-            _pictureRepository.Update(picture);
-            UpdatePictureBinary(picture, StoreInDb ? pictureBinary : new byte[0]);
-
-            if (!StoreInDb)
-                SavePictureInFile(picture.Id, pictureBinary, mimeType);
-
-            //event notification
-            _eventPublisher.EntityUpdated(picture);
-
-            return picture;
-        }
-
-        /// <summary>
-        /// Get a picture local path
-        /// </summary>
-        /// <param name="picture">Picture instance</param>
-        /// <param name="targetSize">The target picture size (longest side)</param>
-        /// <param name="showDefaultPicture">A value indicating whether the default picture is shown</param>
-        /// <returns></returns>
-        public virtual string GetThumbLocalPath(Picture picture, int targetSize = 0, bool showDefaultPicture = true)
-        {
-            var url = GetPictureUrl(picture, targetSize, showDefaultPicture);
-            if (string.IsNullOrEmpty(url))
-                return string.Empty;
-
-            return GetThumbLocalPath(_fileProvider.GetFileName(url));
-        }
 
         #endregion
 
@@ -671,27 +608,28 @@ namespace Portal.Service.Media
         /// <returns>Picture binary</returns>
         protected virtual PictureBinary UpdatePictureBinary(Picture picture, byte[] binaryData)
         {
-            if (picture == null)
-                throw new ArgumentNullException(nameof(picture));
+            //if (picture == null)
+            //    throw new ArgumentNullException(nameof(picture));
 
-            var pictureBinary = picture.PictureBinary;
+            //var pictureBinary = picture.PictureBinary;
 
-            var isNew = pictureBinary == null;
+            //var isNew = pictureBinary == null;
 
-            if (isNew)
-                pictureBinary = new PictureBinary
-                {
-                    PictureId = picture.Id
-                };
+            //if (isNew)
+            //    pictureBinary = new PictureBinary
+            //    {
+            //        PictureId = picture.Id
+            //    };
 
-            pictureBinary.BinaryData = binaryData;
+            //pictureBinary.BinaryData = binaryData;
 
-            if (isNew)
-                _pictureBinaryRepository.Insert(pictureBinary);
-            else
-                _pictureBinaryRepository.Update(pictureBinary);
+            //if (isNew)
+            //    _pictureBinaryRepository.Insert(pictureBinary);
+            //else
+            //    _pictureBinaryRepository.Update(pictureBinary);
 
-            return pictureBinary;
+            //return pictureBinary;
+            return null;
         }
 
         #endregion

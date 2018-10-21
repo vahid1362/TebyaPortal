@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Portal.core.News;
+using Portal.Standard.Core.News;
 using QTasMarketing.Web.Areas.Admin.Models.Content;
 using QTasMarketing.Web.Areas.Admin.Models.Media;
 
