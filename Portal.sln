@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.27428.2043
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29209.62
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Libraries", "Libraries", "{5989FCC9-B91A-40C3-8A04-813A54506A1F}"
 EndProject
@@ -11,17 +11,17 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{B45DF7A0-4
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Portal.Web.Framework", "Portal.Web.Framework\Portal.Web.Framework.csproj", "{5C3CBD6B-251C-4073-BE63-CA8A54D1556C}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ServicesTest", "ServicesTest\ServicesTest.csproj", "{6327F3EB-826C-4938-BC1E-F2E43F9E8985}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QTasMarketing.Web", "QTasMarketing.Web\QTasMarketing.Web.csproj", "{417E02E6-C55B-4150-91BC-589617B870F0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Portal.Standard.Core", "Portal.Standard.Core\Portal.Standard.Core.csproj", "{A44E10AC-39AF-4567-B4D7-13EB4D966DFA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Portal.Standard.Core", "Portal.Standard.Core\Portal.Standard.Core.csproj", "{A44E10AC-39AF-4567-B4D7-13EB4D966DFA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Portal.Standard.Service", "Portal.Standard.Service\Portal.Standard.Service.csproj", "{9C1ED528-DE4C-4F9C-9022-E72F18DB13E6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Portal.Standard.Service", "Portal.Standard.Service\Portal.Standard.Service.csproj", "{9C1ED528-DE4C-4F9C-9022-E72F18DB13E6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Portal.Standard.Infrastructure", "Portal.Standard.Infrastructure\Portal.Standard.Infrastructure.csproj", "{2AE30A9E-D686-482B-9ECD-60051E9E5BAE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Portal.Standard.Infrastructure", "Portal.Standard.Infrastructure\Portal.Standard.Infrastructure.csproj", "{2AE30A9E-D686-482B-9ECD-60051E9E5BAE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Portal.Standard.CrossCutting", "Portal.Standard.CrossCutting\Portal.Standard.CrossCutting.csproj", "{22ABCF52-5A1C-45F8-BBA7-FCF0EEAC6E9E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Portal.Standard.CrossCutting", "Portal.Standard.CrossCutting\Portal.Standard.CrossCutting.csproj", "{22ABCF52-5A1C-45F8-BBA7-FCF0EEAC6E9E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tebyan.Web", "Tebyan.Web\Tebyan.Web.csproj", "{844EBBA8-1400-4964-80AF-47DB8EE9B348}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,10 +33,6 @@ Global
 		{5C3CBD6B-251C-4073-BE63-CA8A54D1556C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5C3CBD6B-251C-4073-BE63-CA8A54D1556C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5C3CBD6B-251C-4073-BE63-CA8A54D1556C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{6327F3EB-826C-4938-BC1E-F2E43F9E8985}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6327F3EB-826C-4938-BC1E-F2E43F9E8985}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6327F3EB-826C-4938-BC1E-F2E43F9E8985}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6327F3EB-826C-4938-BC1E-F2E43F9E8985}.Release|Any CPU.Build.0 = Release|Any CPU
 		{417E02E6-C55B-4150-91BC-589617B870F0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{417E02E6-C55B-4150-91BC-589617B870F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{417E02E6-C55B-4150-91BC-589617B870F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -57,13 +53,16 @@ Global
 		{22ABCF52-5A1C-45F8-BBA7-FCF0EEAC6E9E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{22ABCF52-5A1C-45F8-BBA7-FCF0EEAC6E9E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{22ABCF52-5A1C-45F8-BBA7-FCF0EEAC6E9E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{844EBBA8-1400-4964-80AF-47DB8EE9B348}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{844EBBA8-1400-4964-80AF-47DB8EE9B348}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{844EBBA8-1400-4964-80AF-47DB8EE9B348}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{844EBBA8-1400-4964-80AF-47DB8EE9B348}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{5C3CBD6B-251C-4073-BE63-CA8A54D1556C} = {53514424-2B4A-44A2-A22A-704575EF87B7}
-		{6327F3EB-826C-4938-BC1E-F2E43F9E8985} = {B45DF7A0-4FA0-429D-B2B2-0B252CE0D114}
 		{417E02E6-C55B-4150-91BC-589617B870F0} = {53514424-2B4A-44A2-A22A-704575EF87B7}
 		{A44E10AC-39AF-4567-B4D7-13EB4D966DFA} = {5989FCC9-B91A-40C3-8A04-813A54506A1F}
 		{9C1ED528-DE4C-4F9C-9022-E72F18DB13E6} = {5989FCC9-B91A-40C3-8A04-813A54506A1F}

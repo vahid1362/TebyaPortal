@@ -1,8 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Portal.core.News;
-using Portal.Standard.Core.Media;
 using Portal.Standard.Core.News;
-
+using Portal.Standard.Core.Media;
 namespace Portal.Standard.Infrastructure
 {
   public  class PortalDbContext:DbContext

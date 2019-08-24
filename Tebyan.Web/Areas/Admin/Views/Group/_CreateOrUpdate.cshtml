@@ -1,0 +1,118 @@
+﻿@using Kendo.Mvc.UI
+@using QTasMarketing.Web.Areas.Admin.Models.Content
+@model QTasMarketing.Web.Areas.Admin.Models.Content.GroupViewModel
+<div class="box-body">
+
+
+
+    @Html.HiddenFor(x => x.Id)
+    <div class="row">
+        <div class="col-md-12">
+
+            <div class="form-group">
+                @Html.Label("", "گروه والد", new { @class = "control-label col-md-3" })
+                <div class="col-md-5">
+                   @Html.DropDownListFor(model=>Model.ParentId,Model.AvaiableGroup ,new {@class="form-control",Id="Dropdown"} )
+
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-3" })
+
+                <div class="col-md-4">
+                    @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+                </div>
+
+            </div>
+
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-3" })
+                <div class="col-md-6">
+                    @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control date-textbox" } })
+                    @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Priority, htmlAttributes: new { @class = "control-label col-md-3" })
+                <div class="col-md-9">
+                    @Html.TextBoxFor(model => model.Priority, new { htmlAttributes = new { @class = "form-control " } })
+                    @Html.ValidationMessageFor(model => model.Priority, "", new { @class = "text-danger" })
+                </div>
+
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.IsPrivate, htmlAttributes: new { @class = "control-label col-md-3" })
+                <div class="col-md-9 ">
+                    @Html.CheckBoxFor(model => model.IsPrivate, new { htmlAttributes = new { @class = "form-control " } })
+
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-3">
+                    </div>
+                <div class="col-md-4 ">
+                    @(Html.Kendo().Upload()
+               .Name("files")
+               .Async(a => a
+                   .Save("Save", "Group",new {Model.PictureId })
+                   .Remove("Remove", "Group")
+                   .AutoUpload(true)
+               )
+                          .Events(events => events
+
+                              .Remove("onRemove")
+
+                              .Success("onSuccess")
+
+                          ).Multiple(false)
+
+
+               .Validation(validation =>
+               {
+                   validation.AllowedExtensions(new string[] { ".jpg", ".jpeg", ".png", ".bmp", ".gif" });
+                   validation.MinFileSize(500);
+               }))
+
+                </div>
+                <div class="col-md-5">
+                    <div id="products"></div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+<script>
+    function onSuccess(e) {
+        if (e.operation == "upload") {
+            for (var i = 0; i < e.files.length; i++) {
+                var file = e.files[i].rawFile;
+
+                if (file) {
+                    var reader = new FileReader();
+
+                    reader.onloadend = function () {
+                        $("<div class='product'><img src=" + this.result + " /></div>").appendTo($("#products"));
+                    };
+
+                    reader.readAsDataURL(file);
+                }
+            }
+        }
+    }
+
+    function onRemove(e) {
+
+        $("#products").children().remove();
+    }
+
+    $(function() {
+        $("#Dropdown").select2();
+    });
+</script>

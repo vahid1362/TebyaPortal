@@ -1,18 +1,12 @@
 using AutoMapper;
-using ImageResizer.Configuration.Logging;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Hosting.Internal;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Rest.Serialization;
 using Portal.core.Infrastructure;
-using Portal.core.Membership;
-using Portal.Infrastructure;
-using Portal.Service;
-using Portal.Service.Media;
 using Portal.Service.News;
 using Portal.Standard.Infrastructure;
 using QTasMarketing.Web.Areas.Admin.Extentions;
@@ -44,8 +38,8 @@ namespace QTasMarketing.Web
             //    c.UseSqlServer(Configuration.GetConnectionString("IdentityContext"));
             //});
 
-            var mapper = CreateMapperConfiguration();
-            services.AddSingleton(mapper);
+          
+         
             services.AddMvc().AddJsonOptions(options => options.SerializerSettings.ContractResolver = new ReadOnlyJsonContractResolver()).AddNToastNotifyToastr();
             services.AddKendo();
             services.AddTransient(typeof(IRepository<>), typeof(EFRepository<>));

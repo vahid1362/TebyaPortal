@@ -18,6 +18,7 @@ using Portal.core.News;
 using Portal.Service;
 using Portal.Service.Media;
 using Portal.Service.News;
+using Portal.Standard.Core.News;
 using QTasMarketing.Web.Areas.Admin.Models.Content;
 
 namespace QTasMarketing.Web.Areas.Admin.Controllers

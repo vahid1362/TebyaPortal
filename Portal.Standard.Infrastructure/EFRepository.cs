@@ -1,60 +1,60 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
-using Portal.core;
 using Portal.core.Infrastructure;
+using Portal.core;
 
 namespace Portal.Standard.Infrastructure
 {
     public class EFRepository<T> : IRepository<T> where T : BaseEntity
     {
-        private readonly PortalDbContext _marketingContext;
+        private readonly PortalDbContext _portalContext;
 
-        public EFRepository(PortalDbContext marketingContext)
+        public EFRepository(PortalDbContext portalContext)
         {
-            _marketingContext = marketingContext;
+            _portalContext = portalContext;
         }
         public T GetById(object id)
         {
-            return _marketingContext.Set<T>().Find(id);
+            return _portalContext.Set<T>().Find(id);
         }
 
         public void Insert(T entity)
         {
-            _marketingContext.Set<T>().Add(entity);
-            _marketingContext.SaveChanges();
+            _portalContext.Set<T>().Add(entity);
+            _portalContext.SaveChanges();
         }
 
         public void Insert(IEnumerable<T> entities)
         {
-            _marketingContext.Set<T>().AddRange(entities);
-            _marketingContext.SaveChanges();
+            _portalContext.Set<T>().AddRange(entities);
+            _portalContext.SaveChanges();
         }
 
         public void Update(T entity)
         {
-            _marketingContext.SaveChanges();
+            _portalContext.SaveChanges();
         }
 
         public void Update(IEnumerable<T> entities)
         {
-            _marketingContext.SaveChanges();
+            _portalContext.SaveChanges();
         }
 
         public void Delete(T entity)
         {
-            _marketingContext.Set<T>().Remove(entity);
-            _marketingContext.SaveChanges();
+            _portalContext.Set<T>().Remove(entity);
+            _portalContext.SaveChanges();
         }
 
         public void Delete(IEnumerable<T> entities)
         {
-            _marketingContext.Set<T>().RemoveRange(entities);
-            _marketingContext.SaveChanges();
+            _portalContext.Set<T>().RemoveRange(entities);
+            _portalContext.SaveChanges();
         }
 
-        public IQueryable<T> Table => _marketingContext.Set<T>();
+        public IQueryable<T> Table => _portalContext.Set<T>();
 
-        public IQueryable<T> TableNoTracking => _marketingContext.Set<T>().AsNoTracking();
+        public IQueryable<T> TableNoTracking => _portalContext.Set<T>().AsNoTracking();
     }
 }
