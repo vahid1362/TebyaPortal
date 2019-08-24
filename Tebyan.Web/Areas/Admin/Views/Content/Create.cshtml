@@ -47,7 +47,12 @@
                                 </div>
                                 <!-- /.tab-pane -->
                                 <div class="tab-pane" id="tab_2-2">
-                                    @await  Html.PartialAsync("_CreateOrUpdate.Picture", Model)
+                                    <div class="row">
+                                        <div class="col-md12">
+                                            @await Html.PartialAsync("_CreateOrUpdate.Picture", Model)
+                                        </div>
+                                    </div>
+                                  
                                 </div>
                                 <!-- /.tab-pane -->
                                 
